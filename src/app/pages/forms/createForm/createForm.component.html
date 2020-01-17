@@ -1,0 +1,324 @@
+
+<form nz-form nzLayout="'vertical'" [formGroup]="form" (submit)="submit(form.value)">
+  <nz-card nzType="inner" nzTitle="CREATE APPLICATION FORM" [nzExtra]="extraTemplate">
+    <!-- <h1 text-black mt-2 mb-3>CREATE APPLICATION FORM</h1> -->
+    <!-- <div  formGroupName="formHeader"> -->
+      <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+        <div nz-col nzSpan="8">
+                 <nz-form-item class="full-width" appearance="outline">
+                   <nz-form-control>
+                        <input  nz-input formControlName="formName" placeholder="formName">
+                      </nz-form-control>
+                    </nz-form-item>
+                    </div>
+                      <div  nz-col nzSpan="8">
+                  <nz-form-item class="full-width" appearance="outline">
+                      <nz-form-control>
+                        <input nz-input  placeholder="companyName" formControlName="companyName" type="text">
+                      </nz-form-control>
+                </nz-form-item>
+                </div>
+                <div nz-col nzSpan="8">
+                  <nz-form-item class="full-width" appearance="outline">
+                    <nz-form-control>
+                         <input  nz-input formControlName="jobName" placeholder="jobName">
+                       </nz-form-control>
+                     </nz-form-item>
+                     </div>
+              </div>
+              <div nz-row nzType="flex" nzJustify="center">
+
+                <div nz-col nzSpan="16">
+                  <nz-form-item>
+                    <!-- <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>DatePicker</nz-form-label> -->
+                    <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <nz-date-picker formControlName="startDate"></nz-date-picker>
+                    </nz-form-control>
+                  </nz-form-item>
+                            </div>
+                            <div nz-col nzSpan="16">
+                              <nz-form-item>
+                                <!-- <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>DatePicker</nz-form-label> -->
+                                <nz-form-control [nzSm]="16" [nzXs]="24">
+                                  <nz-date-picker formControlName="endDate"></nz-date-picker>
+                                </nz-form-control>
+                              </nz-form-item>
+                                        </div>
+                      </div>
+  </nz-card>
+              <nz-card style="background: #f4f8fc; margin:20px;" class="border"  [nzBordered]="true">
+                <!-- <input type="hidden" formControlName="id"> -->
+                <div formArrayName="questions">
+                  <div *ngFor="let question of this.form.get('questions').controls; let i = index;">
+                    <div [formGroupName]="i">
+                      <div nz-row [nzGutter]="16" nzType="flex" nzJustify="start">
+                        <div nz-col nzSpan="2">
+                          <span nz-text nzDisabled>{{i+1}}</span>
+                        </div>
+                          <div nz-col nzSpan="8">
+                          <input type="hidden" formControlName="value">
+
+                            <nz-form-item class="full-width" appearance="outline">
+                                    <nz-form-control>
+                                      <textarea nz-input class="form-control" placeholder="Question # {{i+1}}" formControlName="label"></textarea>
+                                    </nz-form-control>
+                            </nz-form-item>
+                      </div>
+
+
+
+                        <div nz-col nzSpan="4">
+                          <nz-form-item class="full-width" appearance="outline">
+                       <nz-form-label nzFor="type">Type of Question</nz-form-label>
+                       <nz-form-control>
+                        <!-- <nz-select [(ngModel)]="contactFormGroup.controls[i].value.type" formControlName="type" > -->
+                          <nz-select formControlName="type" >
+                           <nz-option *ngFor="let q of questionType" [nzValue]="q" placeholder="Type of Question" [nzLabel]="q">{{q}}</nz-option>
+                         </nz-select>
+                       </nz-form-control>
+                   </nz-form-item>
+                         </div>
+
+                        <div nz-col nzSpan="4">
+                          <nz-form-item class="full-width" appearance="outline">
+                            <nz-form-label nzFor="type">Field Name</nz-form-label>
+                            <nz-form-control>
+                               <input nz-input class="form-control" placeholder="Fullname" formControlName="name" type="text">
+                               </nz-form-control>
+                             </nz-form-item>
+                        </div>
+
+                          <div nz-col nzSpan="4">
+                            <nz-form-item>
+                              <nz-form-control nz-tooltip nzTooltipTitle="required question">
+                                <!-- <label nz-checkbox (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate" > Required </label> -->
+                                <!-- <nz-checkbox-group nz-tooltip nzTooltipTitle="required question" formControlName="required" ></nz-checkbox-group> -->
+                                <input type="checkbox"  formControlName="required">
+                              </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                          </div>
+
+                            <div nz-row>
+                            <span *ngIf="contactFormGroup.controls[i].value.type === 'select'">
+                            <nz-divider nzText="options"></nz-divider>
+                            <div  nz-col nzSpan="15">
+                      <div formArrayName="options">
+                        <div  *ngFor="let anwers of question.get('options').controls; let j = index;">
+                          <div [formGroupName]="j">
+                            <div nz-row>
+                              <div nz-col nzSpan="9">
+                              <nz-form-item class="full-width" appearance="outline">
+                                <nz-form-label nzFor="label">select #{{j+1}}</nz-form-label>
+                                <nz-form-control>
+                                  <input nz-input class="form-control" formControlName="label" type="text">
+                                </nz-form-control>
+                                </nz-form-item>
+                              </div>
+                                <div nz-col nzSpan="9">
+                              <nz-form-item class="full-width" appearance="outline">
+                                <nz-form-label nzFor="key">key</nz-form-label>
+                                <nz-form-control>
+                                  <input nz-input placeholder="key" class="form-control" formControlName="key" type="text" >
+                                </nz-form-control>
+                                </nz-form-item>
+                              </div>
+                              <div nz-col nzSpan="6">
+                                <nz-form-item class="full-width" appearance="outline">
+                               <nz-form-label nzFor="type">Question Weighting</nz-form-label>
+                               <nz-form-control>
+                                  <input nz-input class="form-control" placeholder="Question Weighting" formControlName="weight" type="number" nzRequired>
+                                  </nz-form-control>
+                                </nz-form-item>
+                                </div>
+                              </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div nz-col nzSpan="5">
+                          <button nz-button nzType="primary"  type="button" (click)="addAnswer(i)">Add</button>
+                          <button nz-button nzType="accent" type="button" (click)="removeAnswer(i,j)"> Remove</button>
+                        </div>
+                      </span>
+                        </div>
+
+                        <div nz-row>
+                        <span *ngIf="contactFormGroup.controls[i].value.type === 'radio'">
+                          <nz-divider nzText="options"></nz-divider>
+                      <div nz-col nzSpan="15">
+                      <div formArrayName="options">
+                          <div *ngFor="let anwers of question.get('options').controls; let j = index;">
+                            <div [formGroupName]="j">
+                              <div nz-row>
+                                <div nz-col nzSpan="9">
+                                  <nz-form-item class="full-width" appearance="outline">
+                                  <nz-form-label nzFor="label">radio #{{j+1}}</nz-form-label>
+                                  <nz-form-control>
+                                    <input nz-input class="form-control" formControlName="label" type="text">
+                                  </nz-form-control>
+                                  </nz-form-item>
+                                </div>
+                                <div nz-col nzSpan="9">
+                                  <nz-form-item class="full-width" appearance="outline">
+                                    <nz-form-label nzFor="label">key</nz-form-label>
+                                    <nz-form-control>
+                                      <input nz-input class="form-control" formControlName="key" type="text">
+                                    </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div nz-col nzSpan="6">
+                                  <nz-form-item class="full-width" appearance="outline">
+                                 <nz-form-label nzFor="type">Question Weighting</nz-form-label>
+                                 <nz-form-control>
+                                    <input nz-input class="form-control" placeholder="Question Weighting" formControlName="weight" type="number">
+                                    </nz-form-control>
+                                  </nz-form-item>
+                                  </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div nz-col nzSpan="5">
+                          <button nz-button nzType="primary" type="button" (click)="addAnswer(i)">Add </button>
+                          <button nz-button nzType="primary" type="button" (click)="removeAnswer(i,j)"> Remove</button>
+                         </div>
+                        </span>
+                      </div>
+
+                      <div nz-row>
+                    <span *ngIf="contactFormGroup.controls[i].value.type === 'checkbox'">
+                            <nz-divider nzText="options"></nz-divider>
+                            <div nz-col nzSpan="15">
+                            <div formArrayName="options">
+
+                              <div *ngFor="let anwers of question.get('options').controls; let j = index;">
+                                <div [formGroupName]="j">
+
+                                      <div nz-row>
+                                        <div nz-col nzSpan="9">
+                                          <nz-form-item class="full-width" appearance="outline">
+                                            <nz-form-label nzFor="label">check box #{{j+1}}</nz-form-label>
+                                              <nz-form-control>
+                                                <input nz-input class="form-control" formControlName="label" type="text">
+                                            </nz-form-control>
+                                            </nz-form-item>
+                                        </div>
+                                        <div nz-col nzSpan="9">
+                                          <nz-form-item class="full-width" appearance="outline">
+                                            <nz-form-label nzFor="label">key</nz-form-label>
+                                              <nz-form-control>
+                                                <input nz-input class="form-control" formControlName="key" type="text">
+                                            </nz-form-control>
+                                            </nz-form-item>
+                                        </div>
+                                        <div nz-col nzSpan="6">
+                                          <nz-form-item class="full-width" appearance="outline">
+                                         <nz-form-label nzFor="type">Question Weighting</nz-form-label>
+                                         <nz-form-control>
+                                            <input nz-input class="form-control" placeholder="Question Weighting" formControlName="weight" type="number">
+                                            </nz-form-control>
+                                          </nz-form-item>
+                                          </div>
+                                      </div>
+
+                              </div>
+                              </div>
+
+                          </div>
+                          </div>
+                          <div nz-col nzSpan="6">
+                            <button nz-button nzType="primary" type="button" (click)="addAnswer(i)"><i nz-icon nzType="plus" nzTheme="outline">Add</i></button>
+                            <button nz-button nzType="primary" type="button" (click)="removeAnswer(i,j)"> <i nz-icon nzType="close" nzTheme="outline">Remove</i></button>
+                          </div>
+                        </span>
+                        <span *ngIf="contactFormGroup.controls[i].value.type === 'yesno'">
+                          <nz-divider nzText="options"></nz-divider>
+                          <div nz-col nzSpan="15">
+                          <div formArrayName="options">
+
+                            <div *ngFor="let anwers of question.get('options').controls; let j = index;">
+                              <div [formGroupName]="j">
+
+                                    <div nz-row>
+                                      <div nz-col nzSpan="9">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                          <nz-form-label nzFor="label">yes</nz-form-label>
+                                            <nz-form-control>
+                                              <input nz-input class="form-control" formControlName="label" type="text" placeholder="yes" onchange="fillKey()">
+                                          </nz-form-control>
+                                          </nz-form-item>
+                                      </div>
+                                      <div nz-col nzSpan="9">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                          <nz-form-label nzFor="label">key</nz-form-label>
+                                            <nz-form-control>
+                                              <input nz-input class="form-control" formControlName="key" type="text">
+                                          </nz-form-control>
+                                          </nz-form-item>
+                                      </div>
+                                      <div nz-col nzSpan="6">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                       <nz-form-label nzFor="type">Question Weighting</nz-form-label>
+                                       <nz-form-control>
+                                          <input nz-input class="form-control" placeholder="Question Weighting" formControlName="weight" type="number">
+                                          </nz-form-control>
+                                        </nz-form-item>
+                                        </div>
+                                    </div>
+                                    <div nz-row>
+                                      <div nz-col nzSpan="9">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                          <!-- <nz-form-label nzFor="label">no</nz-form-label> -->
+                                            <nz-form-control>
+                                              <input nz-input class="form-control" formControlName="label" type="text" placeholder="no">
+                                          </nz-form-control>
+                                          </nz-form-item>
+                                      </div>
+                                      <div nz-col nzSpan="9">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                          <!-- <nz-form-label nzFor="label">key</nz-form-label> -->
+                                            <nz-form-control>
+                                              <input nz-input class="form-control" formControlName="key" type="text">
+                                          </nz-form-control>
+                                          </nz-form-item>
+                                      </div>
+                                      <div nz-col nzSpan="6">
+                                        <nz-form-item class="full-width" appearance="outline">
+                                       <!-- <nz-form-label nzFor="type">Question Weighting</nz-form-label> -->
+                                       <nz-form-control>
+                                          <input nz-input class="form-control" placeholder="Question Weighting" formControlName="weight" type="number">
+                                          </nz-form-control>
+                                        </nz-form-item>
+                                        </div>
+                                    </div>
+
+                            </div>
+                            </div>
+
+                        </div>
+                        </div>
+                        <!-- <div nz-col nzSpan="6">
+                          <button nz-button nzType="primary" type="button" (click)="addAnswer(i)"><i nz-icon nzType="plus" nzTheme="outline">Add</i></button>
+                          <button nz-button nzType="primary" type="button" (click)="removeAnswer(i,j)"> <i nz-icon nzType="close" nzTheme="outline">Remove</i></button>
+                        </div> -->
+                      </span>
+                      </div>
+                      </div>
+                      <nz-divider ></nz-divider>
+              </div>
+          </div>
+          <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="button" class="mr-2" (click)="addContact()">Next Question</button>
+        </nz-card >
+        <div nz-row>
+          <div nz-col nzSpan="8" nzJustify="end">
+            <button nz-button nzType="secondary"type="submit"><i nz-icon nzType="poweroff"></i>Save Template</button>
+          </div>
+        </div>
+            </form>
+            {{form.value | json}}
+<ng-template #extraTemplate>
+  <a href="/dashboard/alpha">Home</a>
+<ng-template>

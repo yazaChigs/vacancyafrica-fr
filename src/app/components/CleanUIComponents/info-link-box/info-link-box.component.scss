@@ -1,0 +1,84 @@
+@import 'src/assets/styles/mixins.scss';
+
+.danger {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $danger !important;
+  border-right: 4px solid $danger !important;
+}
+
+.icon {
+  position: absolute;
+ // top: rem(14);
+  right: rem(20);
+  i {
+    font-size: rem(24);
+   // color: $danger;
+  }
+}
+.card-box{
+  transition: box-shadow 0.1s ease-in-out;
+  box-shadow: 0 0 2.25rem #e1e1e1;
+  &:hover {
+    cursor: pointer
+  }
+}
+.default {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $default !important;
+  border-right: 4px solid $default !important;
+  i {
+    font-size: rem(24);
+    color: $default;
+  }
+}
+
+.primary {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $primary !important;
+  border-right: 4px solid $primary !important;
+  i {
+    font-size: rem(24);
+    color: $primary;
+  }
+}
+
+.secondary {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $secondary !important;
+  border-right: 4px solid $secondary !important;
+  i {
+    font-size: rem(24);
+    color: $secondary;
+  }
+}
+
+.success {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $success !important;
+  border-right: 4px solid $success !important;
+  i {
+    font-size: rem(24);
+    color: $warning;
+  }
+}
+
+.warning {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $warning !important;
+  border-right: 4px solid $warning !important;
+  i {
+    font-size: rem(24);
+    color: $success;
+  }
+}
+
+
+.info {
+  padding: rem(15) rem(25);
+  border-left: 4px solid $info !important;
+  border-right: 4px solid $info !important;
+  i {
+    font-size: rem(24);
+    color: $info;
+  }
+}

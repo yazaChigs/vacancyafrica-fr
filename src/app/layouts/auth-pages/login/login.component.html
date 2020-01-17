@@ -1,0 +1,118 @@
+<section>
+  <header class="header">
+
+  </header>
+  <div class="content">
+    <div class="promo">
+      <h1 class="mb-3">Vimbika Pro</h1>
+      <p class="text-black">
+        Use the Zimbabwe leading cloud-based inventory tracking software to perform inventory audits, avoid stockouts and maintain inventory levels.
+         Real-time data and analytics keep you in charge of your inventory at all times.
+      </p>
+    </div>
+    <div class="formWrapper">
+      <div class="form">
+      <p class="formTitle">Please log in</p>
+      <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+        <nz-form-item>
+          <nz-form-label nzFor="email">Email</nz-form-label>
+          <nz-form-control>
+            <nz-input-group [nzPrefix]="prefixUser">
+              <input nz-input id="email" formControlName="email">
+            </nz-input-group>
+            <nz-form-explain *ngIf="email.dirty && email.errors">
+              Please input your e-mail address
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="password">Password</nz-form-label>
+          <nz-form-control>
+            <nz-input-group [nzPrefix]="prefixLock">
+              <input type="password" nz-input id="password" formControlName="password">
+            </nz-input-group>
+            <nz-form-explain *ngIf="password.dirty && password.errors">
+              Please input your e-mail address
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <div>
+          <label nz-checkbox>
+            Remember me
+          </label>
+          <a href routerLink="/user/forgot" class="login-form-forgot pull-right utils__link--blue utils__link--underlined">Forgot password</a>
+        </div>
+        <div class="form-actions">
+          <button nz-button nzType="primary" class="width-150 mr-3">
+            Sign in
+          </button>
+          <span class="register-link">
+            <a href="javascript: void(0);" class="utils__link--blue utils__link--underlined">Register</a>
+            if you don&#39;t have an account
+          </span>
+        </div>
+        <div class="form-group">
+          <p>Use another service to Sign In</p>
+          <div class="mt-2">
+            <a href="javascript: void(0);" class="btn btn-icon mr-2">
+              <i class="icmn-facebook"></i>
+            </a>
+            <a href="javascript: void(0);" class="btn btn-icon mr-2">
+              <i class="icmn-google"></i>
+            </a>
+            <a href="javascript: void(0);" class="btn btn-icon mr-2">
+              <i class="icmn-windows"></i>
+            </a>
+            <a href="javascript: void(0);" class="btn btn-icon mr-2">
+              <i class="icmn-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+      <div class="sidebar">
+        <p class="sidebarTitle">Vimbika PaBhizimusi Rako</p>
+        <p class="sidebarSubTitle">2019</p>
+        <div class="sidebarContent">
+          <p>
+            Keep an eye on inventory checkouts and plan out reservations.
+          </p>
+          <p>
+            Draw actionable reports on utilization, checkouts, POs, and more.
+          </p>
+          <p>Manage and track asset purchase orders, vendors, and lifetime costs.</p>
+          <p>Mass scan inventory with our iOS and Android apps in seconds.</p>
+          <p>Keep track of warehoused items through quick scans and seamless audits.</p>
+          <p>Customize alerts to manage stock with ease, and get alerted when stock is low.</p>
+        </div>
+        <div class="sidebarFooter">
+          <span>
+            <i class="icmn-location mr-3"></i>
+            Zimbabwe
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <ul class="footerNav">
+      <li>
+        <a href="javascript: void(0);">Terms of Use</a>
+      </li>
+      <li>
+        <a href="javascript: void(0);">Compliance</a>
+      </li>
+      <li>
+        <a href="javascript: void(0);">Confidential Information</a>
+      </li>
+      <li>
+        <a href="javascript: void(0);">Support</a>
+      </li>
+      <li>
+        <a href="javascript: void(0);">Contacts</a>
+      </li>
+    </ul>
+  </footer>
+</section>
+<ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>

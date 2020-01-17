@@ -1,0 +1,173 @@
+
+<div class="card">
+    <div class="card-body">
+        <nz-tabset>
+          <nz-tab nzTitle="Profile" [nzForceRender]="true">
+              <h4 class="text-black mb-3 offset-md-2">
+                  <strong>Main Parameters</strong>
+                </h4>
+                <form nz-form nzLayout="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()">
+                    <!-- <app-base-form></app-base-form> -->
+                    <input type="hidden" formControlName="id">
+                    <input type="hidden" formControlName="version">
+                    <input type="hidden" formControlName="dateCreated">
+                    <input type="hidden" formControlName="createdById" >
+                    <input type="hidden" formControlName="uuid">
+                  <div class="row">
+                      <div class="col-lg-2">
+
+                        </div>
+                    <div class="col-lg-8">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzRequired nzFor="name">Name</nz-form-label>
+                            <nz-form-control>
+                              <input nz-input formControlName="name" type="text" id="name" placeholder="Company Name">
+                              <nz-tag *ngIf="duplicate" [nzColor]="'red'">Company Name Already Exists!</nz-tag>
+                            </nz-form-control>
+                          </nz-form-item >
+                        </div>
+
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="description">Short Description</nz-form-label>
+                            <nz-form-control>
+                              <textarea rows="3" nz-input id="description" formControlName="description"></textarea>
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      <h4 class="text-black mt-2 mb-3">
+                        <strong>Contact Details</strong>
+                      </h4>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="mobilePhone">Mobile Phone</nz-form-label>
+                            <nz-form-control>
+                              <input nz-input formControlName="mobilePhone" type="text" id="mobilePhone" placeholder="Mobile Number">
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="officePhone">Office Phone</nz-form-label>
+                            <nz-form-control>
+                              <input nz-input formControlName="officePhone" type="text" id="officePhone" placeholder="Office Phone">
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="email">Email</nz-form-label>
+                            <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                              <input nz-input formControlName="email" type="email" id="email" placeholder="Email">
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="fax">Fax</nz-form-label>
+                            <nz-form-control>
+                              <input nz-input formControlName="fax" type="text" id="fax" placeholder="Fax">
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+
+                      <h4 class="text-black mt-2 mb-3">
+                        <strong>Address</strong>
+                      </h4>
+                      <div class="row">
+
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                              <nz-form-label nzFor="street">Street</nz-form-label>
+                              <nz-form-control>
+                                  <input nz-input formControlName="street" type="text" id="street" placeholder="Street">
+                                </nz-form-control>
+                            </nz-form-item>
+                      </div>
+                      <div class="col-lg-6">
+                        <nz-form-item>
+                          <nz-form-label nzFor="city">City</nz-form-label>
+                          <nz-form-control>
+                            <input nz-input formControlName="city" type="text" id="city" placeholder="City">
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="stateProvince">State/Province</nz-form-label>
+                            <nz-form-control>
+                                <input nz-input formControlName="stateProvince" type="text" id="stateProvince" placeholder="State / Province">
+                              </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                        <div class="col-lg-6">
+                            <nz-form-item>
+                              <nz-form-label nzFor="country">Country</nz-form-label>
+                              <nz-form-control nzErrorTip="Modules Required">
+                                  <nz-select formControlName="country"  nzPlaceHolder="Choose Country">
+                                      <nz-option nzValue="ZIMBABWE" nzLabel="ZIMBABWE"></nz-option>
+                                      <nz-option nzValue="SOUTH AFRICA" nzLabel="SOUTH AFRICA"></nz-option>
+                                      <nz-option nzValue="ZAMBIA" nzLabel="ZAMBIA"></nz-option>
+                                    </nz-select>
+                              </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <nz-form-item>
+                            <nz-form-label nzFor="postalCode">Zip/Postal Code</nz-form-label>
+                            <nz-form-control>
+                                <input nz-input formControlName="postalCode" type="text" id="postalCode" placeholder="Zip / Postal Code">
+                              </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      <h4 class="text-black mt-2 mb-3">
+                          <strong>Modules</strong>
+                        </h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                              <nz-form-item>
+                                <nz-form-label nzRequired nzFor="modules">Select Modules</nz-form-label>
+                                <nz-form-control>
+                                    <nz-select nzSize="large" formControlName="modules" nzMode="tags" nzPlaceHolder="Please select" [nzLoading]="loading" [compareWith]="compareFn">
+                                        <nz-option *ngFor="let module of modules" [nzLabel]="module.name" [nzValue]="module"></nz-option>
+                                      </nz-select>
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-actions">
+                                    <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="submit" class="mr-2">Save</button>
+                                    <button nz-button type="reset">Cancel</button>
+                                  </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                  </div>
+                </form>
+          </nz-tab>
+          <nz-tab nzTitle="Logo" [nzForceRender]="true">
+            <app-logo></app-logo>
+            </nz-tab>
+        </nz-tabset>
+
+    </div>
+  </div>
+

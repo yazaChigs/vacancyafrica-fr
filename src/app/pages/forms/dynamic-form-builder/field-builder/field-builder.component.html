@@ -1,0 +1,16 @@
+<nz-card [nzBordered]="true">
+<div nz-row nzJustify="center" [formGroup]="form">
+  <nz-form-label nz-col nzSpan="6"  [attr.for]="field.label">
+    {{field.label}}
+    <strong class="text-danger" *ngIf="field.required">*</strong>
+  </nz-form-label>
+  <div nz-col nzSpan="8" [ngSwitch]="field.type">
+    <textbox *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+    <dropdown *ngSwitchCase="'select'" [field]="field" [form]="form"></dropdown>
+    <checkbox *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
+    <radio *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
+    <!-- <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file> -->
+    <!--<div class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="!isValid && isDirty">{{field.label}} is required</div> -->
+  </div>
+</div>
+</nz-card>

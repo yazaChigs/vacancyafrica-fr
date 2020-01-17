@@ -1,0 +1,27 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+  <input type="hidden" formControlName="id">
+  <input type="hidden" formControlName="version">
+  <input type="hidden" formControlName="dateCreated">
+  <input type="hidden" formControlName="createdById" >
+  <input type="hidden" formControlName="uuid">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>Name</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please Input Module Name!">
+        <input nz-input nzSize="large" id="name" formControlName="name" placeholder="Name" />
+        <nz-tag *ngIf="duplicate" [nzColor]="'red'">Exists!</nz-tag>
+      </nz-form-control>
+
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please Input Name">
+        <textarea rows="2" nzSize="large" nz-input id="description" formControlName="description" placeholder="Description"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button class="class-btn" [disabled]="!form.valid" [nzLoading]="isConfirmLoading" nz-button type="submit" nzType="primary">Save</button>
+        <button class="class-btn" nz-button type="button" nzType="default" (click)="handleCancel()">Cancel</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>

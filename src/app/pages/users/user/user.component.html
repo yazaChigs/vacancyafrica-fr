@@ -1,0 +1,209 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="text-black mb-3">
+        <strong>Main Parameters</strong>
+      </h4>
+
+
+      <form nz-form nzLayout="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()">
+          <!-- <app-base-form></app-base-form> -->
+          <input type="hidden" formControlName="id">
+          <input type="hidden" formControlName="version">
+          <input type="hidden" formControlName="dateCreated">
+          <input type="hidden" formControlName="createdById" >
+          <input type="hidden" formControlName="uuid">
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6">
+                <nz-form-item>
+                  <nz-form-label nzRequired nzFor="firstName">First Name</nz-form-label>
+                  <nz-form-control>
+                    <input nz-input formControlName="firstName" type="text" id="firstName" placeholder="First Name">
+                  </nz-form-control>
+                </nz-form-item >
+              </div>
+
+              <div class="col-lg-6">
+                  <nz-form-item>
+                      <nz-form-label nzRequired nzFor="lastName">Last Name</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input formControlName="lastName" type="text" id="lastName" placeholder="Last Name">
+                      </nz-form-control>
+                    </nz-form-item >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                  <nz-form-item>
+                      <nz-form-label nzFor="userName">Username</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input formControlName="userName" type="text" id="userName" placeholder="Enter Username">
+                      </nz-form-control>
+                    </nz-form-item >
+
+              </div>
+
+              <div class="col-lg-6">
+                  <nz-form-item>
+                      <nz-form-label nzFor="gender">Gender</nz-form-label>
+                      <nz-form-control>
+                          <nz-select formControlName="gender">
+                              <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
+                              <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
+                            </nz-select>
+                      </nz-form-control>
+                    </nz-form-item >
+              </div>
+            </div>
+            <h4 class="text-black mt-2 mb-3">
+              <strong>Contact Details</strong>
+            </h4>
+            <div class="row">
+              <div class="col-lg-6">
+                <nz-form-item>
+                  <nz-form-label nzFor="mobilePhone">Mobile Phone</nz-form-label>
+                  <nz-form-control>
+                    <input nz-input formControlName="mobilePhone" type="text" id="mobilePhone" placeholder="Mobile Number">
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="col-lg-6">
+                <nz-form-item>
+                  <nz-form-label nzFor="officePhone">Office Phone</nz-form-label>
+                  <nz-form-control>
+                    <input nz-input formControlName="officePhone" type="text" id="officePhone" placeholder="Office Phone">
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+
+            <h4 class="text-black mt-2 mb-3">
+              <strong>Address</strong>
+            </h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <nz-form-item>
+                        <nz-form-label nzFor="street">Street</nz-form-label>
+                        <nz-form-control>
+                            <input nz-input formControlName="street" type="text" id="street" placeholder="Street">
+                          </nz-form-control>
+                      </nz-form-item>
+                </div>
+                <div class="col-lg-6">
+                  <nz-form-item>
+                    <nz-form-label nzFor="city">City</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input formControlName="city" type="text" id="city" placeholder="City">
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <nz-form-item>
+                  <nz-form-label nzFor="stateProvince">State/Province</nz-form-label>
+                  <nz-form-control>
+                      <input nz-input formControlName="stateProvince" type="text" id="stateProvince" placeholder="State / Province">
+                    </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="col-lg-6">
+                  <nz-form-item>
+                    <nz-form-label nzFor="country">Country</nz-form-label>
+                    <nz-form-control nzErrorTip="Modules Required">
+                        <nz-select formControlName="country"  nzPlaceHolder="Choose Country">
+                            <nz-option nzValue="ZIMBABWE" nzLabel="ZIMBABWE"></nz-option>
+                            <nz-option nzValue="SOUTH AFRICA" nzLabel="SOUTH AFRICA"></nz-option>
+                            <nz-option nzValue="ZAMBIA" nzLabel="ZAMBIA"></nz-option>
+                          </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                  <nz-form-item>
+                    <nz-form-label nzFor="postalCode">Zip/Postal Code</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="postalCode" type="text" id="postalCode" placeholder="Zip / Postal Code">
+                      </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <!-- <div class="col-lg-6">
+                  <nz-form-item>
+                    <nz-form-label nzRequired nzFor="branch">Branch</nz-form-label>
+                    <nz-form-control>
+                      <nz-select formControlName="branch" [compareWith]="compareFn">
+                        <nz-option *ngFor="let item of branches" [nzValue]="item" [nzLabel]="item.name"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div> -->
+              </div>
+              <h4 class="text-black mt-2 mb-3">
+                  <strong>Access</strong>
+                </h4>
+              <div class="row">
+                  <div class="col-lg-6">
+                      <nz-form-item >
+                          <nz-form-label  nzFor="password" nzRequired>Password</nz-form-label>
+                          <nz-form-control  nzErrorTip="Please input your password!">
+                            <input nz-input type="password" id="password" formControlName="password"
+                              (ngModelChange)="updateConfirmValidator()" />
+                          </nz-form-control>
+                        </nz-form-item>
+                  </div>
+                  <div class="col-lg-6">
+                      <nz-form-item>
+                          <nz-form-label  nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+                          <nz-form-control  nzErrorTip="Password Invalid!">
+                            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+                            <ng-template #errorTpl let-control>
+                              <ng-container *ngIf="control.hasError('required')">
+                                Please confirm your password!
+                              </ng-container>
+                              <ng-container *ngIf="control.hasError('confirm')">
+                                Two passwords that you enter is inconsistent!
+                              </ng-container>
+                            </ng-template>
+                          </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <h4 class="text-black mt-2 mb-3">
+                    <strong>Roles</strong>
+                  </h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <nz-form-item>
+                            <nz-form-label  nzRequired nzFor="userRoles">Select Roles</nz-form-label>
+                            <nz-form-control>
+                              <nz-select nzSize="large" formControlName="userRoles" nzMode="tags" nzPlaceHolder="Please select"
+                              [nzLoading]="loading"  [compareWith]="compareFn">
+                                <nz-option *ngFor="let role of roles" [nzLabel]="role.name" [nzValue]="role"></nz-option>
+                              </nz-select>
+                            </nz-form-control>
+                          </nz-form-item>
+                    </div>
+                </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="form-actions">
+                          <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading"  type="submit" class="mr-2">Save</button>
+                          <button nz-button nzType="danger" (click)="cancel()" type="button">Cancel</button>
+                        </div>
+                  </div>
+                </div>
+          </div>
+
+        </div>
+      </form>
+
+
+    </div>
+  </div>

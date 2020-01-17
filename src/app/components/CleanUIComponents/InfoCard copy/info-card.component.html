@@ -1,0 +1,64 @@
+<div>
+  <div *ngIf="form === 'stats'" class="infoCard" [ngClass]="[
+      type ? type : ''
+    ]">
+    <span *ngIf="icon" class="digit">
+      <i class="{{iconClass}}"></i>
+    </span>
+    <div class="desc">
+      <span class="title">{{label}}</span>
+      <p>Total: {{count}}</p>
+    </div>
+  </div>
+  <div *ngIf="form === 'stats-large'" class="infoCard" [ngClass]="[
+      type ? type : ''
+    ]">
+    <h5 class="text-uppercase mb-3 text-white">{{label}}</h5>
+    <div>
+      <span class="pull-right font-size-36">
+        <strong>{{count}}</strong>
+      </span>
+      <span *ngIf="icon">
+        <i class="{{iconClass}} font-size-36"></i>
+      </span>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div *ngIf="form === 'interactive'" class="infoCard px-3 py-5" [ngClass]="[type ? type : '']">
+    <div *ngIf="icon" class="text-center font-size-30">
+      <i class="{{iconClass}}"></i>
+    </div>
+    <div class="mt-2 text-center">
+      <div class="mb-2">
+        <p>{{descr}}</p>
+      </div>
+      <a href="javascript: void(0);" class="btn {{btnTypeClass}}">
+        Information
+      </a>
+    </div>
+  </div>
+  <div *ngIf="form === 'btn-url'" class="infoCard px-3 py-5" [ngClass]="[type ? type : '']">
+    <!-- <div *ngIf="icon" class="text-center font-size-30">
+      <i class="{{iconClass}}"></i>
+    </div> -->
+    <div class="mt-2 text-center">
+      <div class="mb-2">
+        <p></p>
+      </div>
+      <a routerLink="{{link}}" class="btn {{btnTypeClass}}">
+        {{descr}}
+      </a>
+    </div>
+  </div>
+  <div *ngIf="form === 'bordered'" class="infoCard bordered" [ngClass]="[
+      type ? type : ''
+    ]">
+    <span *ngIf="icon" class="digit">
+      <i class="{{iconClass}}"></i>
+    </span>
+    <div class="desc">
+      <span class="title">{{label}}</span>
+      <p>{{count}}</p>
+    </div>
+  </div>
+</div>

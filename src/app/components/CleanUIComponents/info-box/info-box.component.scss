@@ -1,0 +1,107 @@
+@import 'src/assets/styles/mixins.scss';
+
+
+.item {
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid $gray-border;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  padding: rem(5);
+  background: $white;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.extended {
+  margin: rem(-10) 0 rem(-10) rem(-1);
+  padding: rem(15) rem(5);
+  border-radius: 6px;
+  border-left: 1px solid $gray-border !important;
+  overflow: hidden;
+
+  @media (max-width: $xl-max-width) {
+    margin: 0;
+  }
+}
+
+.default {
+  background: $default;
+  border-color: $default;
+  color: $white;
+}
+
+.primary {
+  background: $primary;
+  border-color: $primary;
+  color: $white;
+}
+
+.secondary {
+  background: $secondary;
+  border-color: $secondary;
+  color: $white;
+}
+
+.success {
+  background: $success;
+  border-color: $success;
+  color: $white;
+}
+
+.warning {
+  background: $warning;
+  border-color: $warning;
+  color: $white;
+}
+
+.danger {
+  background: $danger;
+  border-color: $danger;
+  color: $white;
+}
+
+.info {
+  background: $info;
+  border-color: $info;
+  color: $white;
+}
+
+.header {
+  padding: rem(10) 0;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: rem(3);
+  font-size: rem(24);
+  font-weight: 200;
+  margin-top: rem(10);
+}
+
+.price {
+  font-size: rem(48);
+}
+
+.amount {
+  font-weight: 300;
+  font-size: rem(36);
+}
+
+.period {
+  font-size: rem(16);
+}
+
+.features {
+  li {
+    margin-bottom: rem(10);
+  }
+}
+
+.footer {
+  padding: rem(30) 0 rem(40);
+}

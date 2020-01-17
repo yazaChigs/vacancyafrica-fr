@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">
+    <div class="utils__title">
+      <strong>Companies</strong>
+    </div>
+    <div class="utils__titleDescription">
+      Information
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-6">
+
+            <cui-info-card form="stats" label="Active Companies" icon="flag" type="success">
+              <!-- removed [count]="" -->
+            </cui-info-card>
+
+          </div>
+          <div class="col-lg-6">
+            <cui-info-card form="stats" label="Inactive Companies" icon="bullhorn" type="danger">
+              <!-- removed [count]="" -->
+            </cui-info-card>
+
+          </div>
+          <div class="col-lg-12">
+            <cui-info-card form="btn-url" descr="Add Company" label="" link="company/new" type="empty">
+              <!-- removed [count]="" -->
+            </cui-info-card>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-6">
+            <app-info-link-box styl="info" text="{{roles}} Roles" icon="lock" link="/site-manager/access/roles">
+            </app-info-link-box>
+          </div>
+          <div class="col-lg-6">
+            <app-info-link-box styl="secondary" text="{{permissions}} Permissions" icon="key"
+              link="/site-manager/access/permissions"></app-info-link-box>
+             </div>
+          <div class="col-lg-6">
+            <app-info-link-box styl="danger" text="{{modules}} Modules" icon="appstore"
+              link="/site-manager/access/modules"></app-info-link-box>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

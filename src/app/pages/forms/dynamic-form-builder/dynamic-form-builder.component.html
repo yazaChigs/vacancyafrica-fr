@@ -1,0 +1,48 @@
+
+<nz-card nzType="inner" nzTitle="Tell us about yourself" [nzExtra]="extraTemplate">
+<form (ngSubmit)="onSubmit(this.myForm.value)" [formGroup]="myForm" class="form-horizontal">
+  <!-- <input type="hidden formC" -->
+  <div nz-row nzJustify="center">
+    <div nz-col nzSpan="8">
+      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.formName}}</h1>
+    </div>
+    <div nz-col nzSpan="8">
+      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.companyName}}</h1>
+    </div>
+    <div nz-col nzSpan="8">
+      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.jobName}}</h1>
+    </div>
+  </div>
+  <div nz-row nzJustify="center">
+    <div nz-col nzSpan="8">
+      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">startDate:{{formData?.startDate}}</h1>
+    </div>
+    <div  nz-col nzSpan="8">
+      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">endDate:{{formData?.endDate}}</h1>
+    </div>
+  </div>
+  <div *ngFor="let field of fields">
+      <field-builder [field]="field" [form]="form"></field-builder>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="4"></div>
+    <div nz-col nzSpan="4">
+      <button  nz-button nzType="primary" type="submit"  [disabled]="!myForm.valid"  class="mr-2">Save</button>
+    </div>
+  </div>
+</form>
+</nz-card>
+<ng-template #extraTemplate>
+  <input
+                  placeholder="Search Form"
+                  nz-input
+                  [(ngModel)]="inputValue"
+                  (input)="onInput($event.target?.value)"
+                  [nzAutocomplete]="auto"
+                />
+                <nz-autocomplete #auto>
+                    <nz-auto-option *ngFor="let item of listOfForms" (click)="getForm(item.formName)"   [nzValue]="item.formName">{{item.formName}}</nz-auto-option>
+                </nz-autocomplete>
+  <!-- <a href="/dashboard/alpha">Home</a> -->
+</ng-template>
+{{myForm.value | json}}
