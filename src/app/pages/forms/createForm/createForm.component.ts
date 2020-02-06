@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { FormService } from 'src/app/services/formService';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
+import { CrudService } from '../../../shared/service/crud.service';
+import { BaseNameService } from '../../../shared/service/basename.service';
+import { BaseNameType } from 'src/app/shared/enum/base-name-type.enum';
+import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-createForm',
@@ -11,12 +15,20 @@ import { NzNotificationService } from 'ng-zorro-antd';
 })
 export class CreateFormComponent implements OnInit {
   public form: FormGroup;
+  public adForm: FormGroup;
   public formHeader: FormGroup;
   public contactList: FormArray;
   public anwersList: FormArray;
-  list: any[];
-  listA: any[];
+  list: [];
+  listA: [];
   questionType = ['text', 'checkbox', 'select', 'number', 'radio', 'yesno'];
+  categoryList: any[]=[];
+  compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
+  companyName = sessionStorage.getItem('C_NAME');
+  listOfForms: any[];
+  selectedValue :any;
+  isSaveLoading = false
+  loading = false
 
   // returns all form groups under contacts
   get createdFormHeader() {
@@ -29,26 +41,43 @@ export class CreateFormComponent implements OnInit {
     return this.form.get('questions.options') as FormArray;
   }
 
-  constructor(private fb: FormBuilder, private formService: FormService, private notification: NzNotificationService) {}
+  constructor(private http: HttpClient, private fb: FormBuilder, private formService: FormService, private baseNameService: BaseNameService,
+     private notification: NzNotificationService, private service: CrudService) {}
 
   ngOnInit() {
+
     this.form = this.fb.group({
-      // id: [null, Validators.compose([Validators.required])],
-      // organization: [null],
-      // formHeader: this.fb.group({
         id: new FormControl(),
+        overallWeight: new FormControl(0),
         formName: new FormControl('', Validators.required),
-        companyName: new FormControl('', Validators.required),
+        companyName: new FormControl(this.companyName, Validators.required),
+        category: new FormControl(null, Validators.required),
         jobName: new FormControl('', Validators.required),
         startDate: new FormControl(),
         endDate: new FormControl(),
-      // }),
       questions: this.fb.array([this.createContact()])
     });
+
+
+
+    this.adForm = this.fb.group({
+      id: new FormControl(),
+      title: new FormControl('', Validators.required),
+      job: new FormControl('', Validators.required),
+      companyName: new FormControl(this.companyName, Validators.required),
+      category: new FormControl(null, Validators.required),
+      formName : new FormControl(null, Validators.required),
+      description: new FormControl('', Validators.required),
+      startDate: new FormControl(),
+      endDate: new FormControl(),
+      files: new FormControl(),
+  });
 
     // set contactlist to this field
     this.contactList = this.form.get('questions') as FormArray;
     this.anwersList = this.form.get('options') as FormArray;
+    this.getCategories();
+    this.getAllFormsList();
   }
 
   // contact formgroup
@@ -64,6 +93,7 @@ export class CreateFormComponent implements OnInit {
     });
   }
 
+
   createAnswer(): FormGroup {
     return this.fb.group({
       key: new FormControl(),
@@ -75,9 +105,50 @@ export class CreateFormComponent implements OnInit {
     return this.fb.group({
       formName: new FormControl(),
       companyName: new FormControl(),
+      category: new FormControl(),
       jobName: new FormControl(),
       startDate: new FormControl(),
       endDate: new FormControl(),
+      firstName: new FormControl(),
+      middleName: new FormControl(),
+      lastName: new FormControl(),
+      dateOfBirth: new FormControl(),
+      mobile: new FormControl(),
+      email: new FormControl(),
+      address: new FormControl(),
+    });
+  }
+  compareByValue(f1: any, f2: any) {
+    return f1 && f2 && f1.id === f2.id;
+  }
+
+  setMediaUploadHeaders = (file: UploadFile) => {
+    return {
+      "Content-Type": "multipart/form-data",
+      "Accept": "application/json",
+    }
+  };
+  customUploadReq = (item: UploadXHRArgs) => {
+    const formData = new FormData();
+    formData.append('file', item.file as any); // tslint:disable-next-line:no-any
+    ///formData.append('id', '1000');
+    const req = new HttpRequest('POST', item.action, formData, {
+      reportProgress : true,
+      withCredentials: false
+    });
+    // Always return a `Subscription` object, nz-upload will automatically unsubscribe at the appropriate time
+   return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        if (event.total > 0) {
+          (event as any).percent = event.loaded / event.total * 100; // tslint:disable-next-line:no-any
+        }
+        // To process the upload progress bar, you must specify the `percent` attribute to indicate progress.
+        item.onProgress(event, item.file);
+      } else if (event instanceof HttpResponse) { /* success */
+        item.onSuccess(event.body, item.file, event);
+      }
+    },(err) => { /* error */
+      item.onError(err, item.file);
     });
   }
 
@@ -125,8 +196,28 @@ export class CreateFormComponent implements OnInit {
 
   // method triggered when form is submitted
   submit(formValue) {
+    this.isSaveLoading= true
     console.log(formValue);
-    this.formService.submit(formValue).subscribe(
+    this.service.save(formValue, '/create-form/create').subscribe(
+    // this.formService.submit(formValue).subscribe(
+      result => {
+        console.log(result);
+        this.createNotification('success');
+      },
+      error => {
+        console.log(error.error);
+        this.createNotification('error');
+      },
+      () => {
+        this.isSaveLoading= false
+      }
+    );
+  }
+
+  submitAd(adFormValue) {
+    console.log(adFormValue);
+    this.service.save(adFormValue, '/advert/save').subscribe(
+    // this.formService.submit(formValue).subscribe(
       result => {
         console.log(result);
         this.createNotification('success');
@@ -137,6 +228,32 @@ export class CreateFormComponent implements OnInit {
       }
     );
   }
+  getAllFormsList() {
+    this.service.getAll('/create-form/get-all').subscribe(
+      result => {
+        console.log(result)
+        // this.options = result;
+        this.listOfForms = result;
+        // this.createNotification('success');
+      },
+        error => {
+          this.createNotification('error');
+          console.log(error.error)
+        }
+    );
+  }
+
+  getCategories() {
+    const baseType = BaseNameType;
+    this.baseNameService.getAll(baseType[BaseNameType.CATEGORY]).subscribe(
+      result => {
+        console.log(result.list)
+        this.categoryList = result.list;
+      },
+      error => {
+        console.log(error.error);
+   }
+     ); }
 
   createNotification(type: string): void {
     this.notification.create(
@@ -146,16 +263,24 @@ export class CreateFormComponent implements OnInit {
     );
   }
 
-  getForm() {
-    this.formService.getForm('ELEAZAR').subscribe(
+  getForm(event) {
+    console.log(this.selectedValue);
+    if (this.selectedValue !== null && this.selectedValue !== undefined) {
+    this.service.getItem('/create-form/get/' + this.selectedValue).subscribe(
       result => {
-        console.log(result);
+        console.log(result.category);
+        this.adForm.controls['job'].setValue(result.jobName);
+        this.adForm.controls['category'].setValue( result.category);
+        this.adForm.controls['startDate'].setValue(result.startDate);
+        this.adForm.controls['endDate'].setValue(result.endDate);
       },
       error => {
         console.log(error.error);
       }
     );
+    }
   }
+
 
   checkDuplicateInObject(propertyName, inputArray) {
     let seenDuplicate = false,

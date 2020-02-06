@@ -7,6 +7,5 @@ export class Global {
   // baseUrl = 'http://10.8.0.3:8080/smarthealth';
   // baseUrl = 'http://192.168.100.203/smarthealth';
  // baseUrl = 'http://192.168.100.10:8080/smarthealth';
- // baseUrl = 'https://smarthealth.africa/smarthealth';
- // baseUrl = 'https://uat.smarthealth.africa/uat-smarthealth';
+//  baseUrl = 'https://vacancy.africa/vacancyafrica';
 }

@@ -4,23 +4,83 @@
   <!-- <input type="hidden formC" -->
   <div nz-row nzJustify="center">
     <div nz-col nzSpan="8">
-      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.formName}}</h1>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.formName}}</h3>
     </div>
     <div nz-col nzSpan="8">
-      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.companyName}}</h1>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.companyName}}</h3>
     </div>
     <div nz-col nzSpan="8">
-      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.jobName}}</h1>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.jobName}}</h3>
     </div>
   </div>
+    <nz-divider></nz-divider>
   <div nz-row nzJustify="center">
     <div nz-col nzSpan="8">
-      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">startDate:{{formData?.startDate}}</h1>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">CATEGORIES:{{formData?.category}}</h3>
+    </div>
+    <div nz-col nzSpan="8">
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">startDate:{{formData?.startDate   | date}}</h3>
     </div>
     <div  nz-col nzSpan="8">
-      <h1 text-black mt-2 mb-3 nz-title nzType="secondary">endDate:{{formData?.endDate}}</h1>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">endDate:{{formData?.endDate   | date}}</h3>
     </div>
   </div>
+  <nz-divider></nz-divider>
+              <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                <div nz-col nzSpan="8">
+                         <nz-form-item class="full-width" appearance="outline">
+                           <nz-form-control>
+                                <input  nz-input formControlName="firstName" placeholder="First name">
+                              </nz-form-control>
+                            </nz-form-item>
+                            </div>
+                              <div  nz-col nzSpan="8">
+                          <nz-form-item class="full-width" appearance="outline">
+                              <nz-form-control>
+                                <input nz-input  placeholder="Middle name" formControlName="middleName" type="text" >
+                              </nz-form-control>
+                        </nz-form-item>
+                        </div>
+                        <div nz-col nzSpan="8">
+                          <nz-form-item class="full-width" appearance="outline">
+                            <nz-form-control>
+                                 <input  nz-input formControlName="lastName" placeholder="Last name">
+                               </nz-form-control>
+                             </nz-form-item>
+                             </div>
+                      </div>
+                      <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                        <div nz-col nzSpan="8">
+                                 <nz-form-item class="full-width" appearance="outline">
+                                   <nz-form-control>
+                                        <input  nz-input formControlName="dateOfBirth" placeholder="DOB">
+                                      </nz-form-control>
+                                    </nz-form-item>
+                                    </div>
+                                      <div  nz-col nzSpan="8">
+                                  <nz-form-item class="full-width" appearance="outline">
+                                      <nz-form-control>
+                                        <input nz-input  placeholder="Mobile" formControlName="mobile" type="text" >
+                                      </nz-form-control>
+                                </nz-form-item>
+                                </div>
+                              </div>
+                              <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                                <div nz-col nzSpan="8">
+                                         <nz-form-item class="full-width" appearance="outline">
+                                           <nz-form-control>
+                                                <input  nz-input formControlName="email" placeholder="email address">
+                                              </nz-form-control>
+                                            </nz-form-item>
+                                            </div>
+                                              <div  nz-col nzSpan="8">
+                                          <nz-form-item class="full-width" appearance="outline">
+                                              <nz-form-control>
+                                                <input nz-input  placeholder="Physical address" formControlName="address" type="text" >
+                                              </nz-form-control>
+                                        </nz-form-item>
+                                        </div>
+                                      </div>
   <div *ngFor="let field of fields">
       <field-builder [field]="field" [form]="form"></field-builder>
   </div>
@@ -33,6 +93,7 @@
 </form>
 </nz-card>
 <ng-template #extraTemplate>
+
   <input
                   placeholder="Search Form"
                   nz-input
@@ -43,6 +104,5 @@
                 <nz-autocomplete #auto>
                     <nz-auto-option *ngFor="let item of listOfForms" (click)="getForm(item.formName)"   [nzValue]="item.formName">{{item.formName}}</nz-auto-option>
                 </nz-autocomplete>
-  <!-- <a href="/dashboard/alpha">Home</a> -->
 </ng-template>
-{{myForm.value | json}}
+<!-- {{myForm.value | json}} -->

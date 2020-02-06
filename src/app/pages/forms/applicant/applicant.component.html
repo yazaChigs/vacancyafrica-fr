@@ -1,0 +1,37 @@
+<!-- <nz-table #basicTable [nzData]="questionnareArray">
+  <thead>
+    <tr>
+      <th>Questions</th>
+      <th>answers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data; let j = index;">
+      <td>{{ data.lable }}</td>
+      <td>{{ applicatantArray[j] }}</td>
+      <td>{{ data.address }}</td>
+      <td>
+        <a>Action 一 {{ data.name }}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table> -->
+
+<table style="width:100%">
+  <tr >
+    <th>Questions</th>
+    <th>answers</th>
+  </tr >
+  <tr  *ngFor="let data of questionnareArray; let j = index;">
+    <td>{{ data }}</td>
+    <!-- <div *ngIf="applicatantArray[j].length !== 1">
+      <td >{{ applicatantArray[j].label }}</td>
+    </div> -->
+      <td>{{ applicatantArray[j] }}</td>
+      <!-- <td *ngIf="applicatantArray[j].length === 1">{{ applicatantArray[j] }}</td> -->
+  </tr>
+</table>
+
+<!-- {{applicatantArray|}} -->

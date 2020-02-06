@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthenticateService {
   private getTokenUrl = this.global.baseUrl + '/authentication';
+  private getVisitorTokenUrl = this.global.baseUrl + '/api/visitor/authentication';
   private sendEmailUrl = this.global.baseUrl + '/api/user/password/reset/email?email=';
   private saveNewPasswordUrl = this.global.baseUrl + '/api/user/password/reset/token';
   constructor(private http: HttpClient, private global: Global) {
@@ -23,5 +24,12 @@ export class AuthenticateService {
     formData.append('token', token);
     formData.append('password', password);
     return this.http.post<any>(this.saveNewPasswordUrl, formData);
+  }
+
+  attemptAuthVisitor(userName: string, password: string): Observable<any> {
+    const credentials = new FormData();
+    credentials.append('userName', userName);
+    credentials.append('password', password);
+    return this.http.post<any>(this.getVisitorTokenUrl, credentials);
   }
 }

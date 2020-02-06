@@ -4,6 +4,7 @@ import { ModulesComponent } from './modules/modules.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RolesComponent } from './roles/roles.component';
+import { JobCategoriesComponent } from './job-categories/job-categories.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'permissions',
     component: PermissionsComponent,
     data: { title: 'Permissions' },
+  },
+  {
+    path: 'categories',
+    component: JobCategoriesComponent,
+    data: { title: 'Categories' },
   }
 ];
 

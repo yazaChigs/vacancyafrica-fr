@@ -48,6 +48,10 @@ const routes: Routes = [
         loadChildren: 'src/app/pages/site-manager/site.module#SiteManagerModule',
       },
       {
+        path: 'visitor',
+        loadChildren: 'src/app/pages/visitor/visitor.module#VisitorModule',
+      },
+      {
         path: 'company',
         loadChildren: 'src/app/pages/site-manager/company/company.module#CompanyModule',
       },

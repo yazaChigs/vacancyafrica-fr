@@ -13,6 +13,12 @@ import { DashboardDocsComponent } from './docs/docs.component'
 
 const routes: Routes = [
   {
+    path: '',
+    component: DashboardAlphaComponent,
+    data: { title: 'Dashboard Alpha' },
+    // canActivate: [AuthGuard],
+  },
+  {
     path: 'alpha',
     component: DashboardAlphaComponent,
     data: { title: 'Dashboard Alpha' },
@@ -22,25 +28,25 @@ const routes: Routes = [
     path: 'beta',
     component: DashboardBetaComponent,
     data: { title: 'Dashboard Beta' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'crypto',
     component: DashboardCryptoComponent,
     data: { title: 'Dashboard Crypto' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'gamma',
     component: DashboardGammaComponent,
     data: { title: 'Dashboard Gamma' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'docs',
     component: DashboardDocsComponent,
     data: { title: 'Dashboard Docs' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 ]
 

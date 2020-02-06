@@ -1,15 +1,15 @@
-<!-- <div [formGroup]="form">
+<div [formGroup]="form">
   <div class="form-check" *ngFor="let opt of field.options">
-    <input class="form-check-input" type="radio" [value]="opt.key" >
-    <label class="form-check-label">
+    <input  [formControlName]="field.name" type="radio"  [value]="opt.key"  (change)="radioChange($event,opt)">
+    <label>
       {{opt.label}}
     </label>
   </div>
-</div> -->
+</div>
 
-<div [formGroup]="form">
+<!-- <div [formGroup]="form">
   <div class="form-check" *ngFor="let opt of field.options">
     <nz-radio-group>
-      <label nz-radio nzValue="opt.key" id="opt.key">{{opt.label}}</label>
+      <label nz-radio name="myradio"  nzValue="opt.key" id="opt.key">{{opt.label}}</label>
     </nz-radio-group>
-  </div></div>
+  </div></div> -->

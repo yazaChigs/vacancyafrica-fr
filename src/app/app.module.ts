@@ -22,7 +22,7 @@ import { reducers, metaReducers } from './store/reducers'
 /**
  * Locale Registration
  */
-import { registerLocaleData, LocationStrategy, HashLocationStrategy } from '@angular/common'
+import { registerLocaleData, LocationStrategy, HashLocationStrategy, DatePipe } from '@angular/common'
 import { default as localeEn } from '@angular/common/locales/en'
 import { NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd'
 import { Global } from './global'
@@ -96,7 +96,7 @@ const firebaseConfig = {
     AppRoutingModule,
   ],
   providers: [
-    ...LOCALE_PROVIDERS,
+    ...LOCALE_PROVIDERS, DatePipe,
     { provide: NZ_ICONS, useValue: icons },
     { provide: FirestoreSettingsToken, useValue: {} },
     AuthenticateService,

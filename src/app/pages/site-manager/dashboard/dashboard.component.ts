@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   roles = 0;
   modules = 0;
   permissions = 0;
+  categories = 0;
   constructor(private baseNameService: BaseNameService, private fb: FormBuilder, private router: Router,
               private activatedRouter: ActivatedRoute,
               private notification: NzNotificationService, private service: CrudService) { }
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
          this.roles = Number(result.roles);
          this.modules = Number(result.modules);
          this.permissions = Number(result.permissions);
+         this.categories = Number(result.categories);
       },
       error => {
         this.notification.error(

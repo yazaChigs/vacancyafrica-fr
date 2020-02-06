@@ -6,6 +6,15 @@
 </div>
 <div [ngClass]="isLightTheme ? 'navigation light' : 'navigation'">
   <perfect-scrollbar [ngClass]="isMobileView ? 'scrollbarMobile' : 'scrollbarDesktop'">
+    <nz-carousel nzAutoPlay [nzEffect]="'fade'">
+      <div nz-carousel-content *ngFor="let index of array" [ngStyle]="{backgroundImage: 'url(\'assets/images/photos/' + index + '.jpeg\')'}">
+        <h3>{{ index }}</h3>
+      </div>
+      <!-- <div nz-carousel-content>A</div>
+          <div nz-carousel-content>B</div>
+          <div nz-carousel-content>C</div>
+          <div nz-carousel-content>D</div> -->
+    </nz-carousel>
     <ul nz-menu [nzTheme]="isLightTheme ? 'light' : 'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isMenuCollapsed">
         <li *ngIf="roles.includes('ROLE_GLOBAL')"  nz-menu-item>
 

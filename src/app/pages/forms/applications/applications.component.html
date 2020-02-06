@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header">
+    <div class="utils__title">
+      <strong>
+        Applicants
+      </strong>
+      <a class="spacer" [routerLink]="['/forms/new']"  nz-button nzType="primary" nzSize="large" nzShape="circle"><i nz-icon nzType="plus"></i></a>
+    </div>
+  </div>
+  <div class="card-body">
+    <nz-table #nzTable [nzData]="displayUsers" [nzLoading]="loading">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th nzShowSort nzSortKey="firstName" nzCustomFilter>
+          Firstname
+        </th>
+        <th nzShowSort nzSortKey="lastName">Lastname</th>
+        <th nzShowSort nzSortKey="userName">Form Name</th>
+        <th nzShowSort nzSortKey="overallWeight">Weight</th>
+
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of nzTable.data">
+        <td>
+          <a class="utils__link--underlined" href="javascript: void(0);">
+            {{item.firstName}}
+          </a>
+        </td>
+        <td>
+          {{item.lastName}}
+        </td>
+        <td>
+          {{item.formName}}
+        </td>
+        <td>
+          {{item.overallWeight}}
+        </td>
+        <td>
+          <button nz-button class="mr-1" (click)="edit(item.id)" nzSize="small"><i nz-icon type="edit" theme="outline"></i> View</button>
+          <!-- <button nz-button class="mr-1" (click)="delete(item.id)" nzSize="small"><i nz-icon type="delete" theme="outline"></i> Remove</button> -->
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+
+  </div>
+</div>
+<nz-modal [(nzVisible)]="isModalVisible" nzTitle="Delete User" nzOkText="Yes" nzCancelText="No" (nzOnOk)="deleteItem()"
+(nzOnCancel)="closeModal()">
+<h3>Are you sure?</h3>
+</nz-modal>

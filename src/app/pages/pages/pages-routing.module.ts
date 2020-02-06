@@ -35,7 +35,7 @@ const routes: Routes = [
     path: 'login-beta',
     component: PagesLoginBetaComponent,
     data: { title: 'Pages Login Beta' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'pricing-table',
@@ -47,7 +47,7 @@ const routes: Routes = [
     path: 'register',
     component: PagesRegisterComponent,
     data: { title: 'Pages Register' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 ]
 

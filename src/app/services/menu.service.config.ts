@@ -59,6 +59,12 @@ export const getLeftMenuData: any[] = [
         url: '/forms/view',
         pro: true,
       },
+      {
+        key: 'applications',
+        title: 'Apllications',
+        url: '/forms/applications',
+        pro: true,
+      },
     ],
   },
   {

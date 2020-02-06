@@ -41,20 +41,31 @@ export class AuthService {
     // })
   }
 
+  async SignInVisitor(userName: string, password: string) {
+    await this.authenticateService.attemptAuthVisitor(userName, password).subscribe(
+      data=> {
+        console.log(data)
+        this.token.signOut();
+        // this.token.saveToken(data.token);
+        this.token.saveUser(JSON.stringify(data));
+        this.token.saveUserType(JSON.stringify('VISITOR'));
+        // this.token.saveRoles(JSON.stringify(this.loadRoles(data.visitor.userRoles)));
+        this.router.navigate(['/dashboard']);
+        this.notification.success(
+          'Logged In',
+          'You have successfully Logged In',
+        );
+      },
+      error => {
+        console.log(error);
+        this.notification.error('Oooooops', 'Failed to Login?');
+      }
+    );
+  }
+
   async SignIn(userName: string, password: string) {
-    // try {
-    //   await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    //   this.router.navigate(['dashboard/alpha'])
-    //   this.notification.success(
-    //     'Logged In',
-    //     'You have successfully logged in to Clean UI Angular Admin Template!',
-    //   )
-    // } catch (error) {
-    //   this.notification.error(error.code, error.message)
-    // }
     await this.authenticateService.attemptAuth(userName, password).subscribe(
       data => {
-        console.log(data)
         this.token.saveToken(data.token);
         this.token.saveUser(JSON.stringify(data.user));
         if (data.company !== null && data.company !== undefined) {
@@ -92,6 +103,11 @@ export class AuthService {
       return user;
     }
 
+    get visitor(): any {
+      const user = JSON.parse(this.token.getUser());
+      return user;
+    }
+
     public roles(): Array<string> {
       const r = JSON.parse(this.token.getRoles());
       return r;
@@ -115,6 +131,6 @@ export class AuthService {
     // this.router.navigate(['login']);
     // await this.afAuth.auth.signOut()
     localStorage.removeItem('user')
-    this.router.navigate(['user/login'])
+    // this.router.navigate(['user/login'])
   }
 }

@@ -4,7 +4,8 @@
       <nz-avatar nzIcon="user" [nzShape]="'square'" [nzSize]="'large'" class="avatar"></nz-avatar>
     </nz-badge>
   </a>
-  <ul nz-menu>
+  <div *ngIf="!haveToLogin">
+  <ul  nz-menu>
     <li nz-menu-item>
       <strong>Hello, {{userName}}</strong>
       <div>
@@ -36,7 +37,7 @@
     </li>
     <li nz-menu-divider></li>
     <li nz-menu-item>
-      <a href="javascript: void(0);">
+      <a href="javascript: void(0);" [routerLink]="['/visitor/edit']" routerLinkActive="router-link-active" >
         <i class="menuIcon icmn-user"></i>
         Edit Profile
       </a>
@@ -49,4 +50,20 @@
       </a>
     </li>
   </ul>
+</div>
+  <div *ngIf="haveToLogin">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <button  nz-button nzType="link" (click)="adminLogin()">
+        <i class="menuIcon icmn-exit"></i>
+       Admin Login
+      </button>
+    </li>
+    <li nz-menu-item>
+      <button nz-button nzType="link" (click)="logouClient()">
+        <i class="menuIcon icmn-exit"></i>
+        Login</button>
+    </li>
+  </ul>
+</div>
 </nz-dropdown>

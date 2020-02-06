@@ -14,19 +14,19 @@ const routes: Routes = [
     path: 'add-blog-post',
     component: BlogAddBlogPostComponent,
     data: { title: 'Blog Add Blog Post' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'feed',
     component: BlogFeedComponent,
     data: { title: 'Blog Feed' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'post',
     component: BlogPostComponent,
     data: { title: 'Blog Post' },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 ]
 

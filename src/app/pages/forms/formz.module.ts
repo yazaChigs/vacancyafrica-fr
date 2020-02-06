@@ -1,3 +1,4 @@
+import { FileComponent } from './dynamic-form-builder/atoms/file';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,12 +13,22 @@ import { DropDownComponent } from './dynamic-form-builder/atoms/dropdown/dropdow
 import { RadioComponent } from './dynamic-form-builder/atoms/radio/radio.component';
 import { TextBoxComponent } from './dynamic-form-builder/atoms/textbox/textbox.component';
 import { FieldBuilderComponent } from './dynamic-form-builder/field-builder/field-builder.component';
+import { ApplicationsComponent } from './applications/applications.component';
+import { QuillModule } from 'ngx-quill';
+import { ApplicantComponent } from './applicant/applicant.component';
 @NgModule({
-  imports: [FormsRoutingModule, FormsModule, ReactiveFormsModule,CommonModule,
+  imports: [FormsRoutingModule, FormsModule, ReactiveFormsModule,CommonModule, QuillModule,
     NgZorroAntdModule.forRoot(),
 
      SharedModule, CleanUIModule],
-  declarations: [ CreateFormComponent, DynamicFormBuilderComponent,
-    CheckBoxComponent, DropDownComponent,RadioComponent, TextBoxComponent, FieldBuilderComponent,],
+  declarations: [ CreateFormComponent,  ApplicationsComponent, ApplicantComponent,
+    // DynamicFormBuilderComponent,
+    // FieldBuilderComponent,
+    // TextBoxComponent,
+    // DropDownComponent,
+    // CheckBoxComponent,
+    // FileComponent,
+    // RadioComponent
+  ],
 })
 export class FormzModule {}

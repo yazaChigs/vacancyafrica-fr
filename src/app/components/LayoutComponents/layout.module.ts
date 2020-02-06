@@ -16,6 +16,8 @@ import { MenuTopComponent } from './Menu/MenuTop/menu-top.component'
 import { FooterComponent } from './Footer/footer.component'
 import { BreadcrumbsComponent } from './Breadcrumbs/breadcrumbs.component'
 import { SettingsComponent } from './Settings/settings.component'
+import { VisitorLoginComponent } from '../../pages/visitor/visitor-login/visitor-login.component';
+import { VisitorSigninComponent } from '../../pages/visitor/visitor-signin/visitor-signin.component';
 
 const COMPONENTS = [
   TopbarComponent,
@@ -28,6 +30,7 @@ const COMPONENTS = [
   MenuLeftComponent,
   MenuTopComponent,
   FooterComponent,
+  VisitorLoginComponent, VisitorSigninComponent,
   BreadcrumbsComponent,
   SettingsComponent,
 ]
@@ -36,5 +39,6 @@ const COMPONENTS = [
   imports: [SharedModule, FormsModule, ReactiveFormsModule, PerfectScrollbarModule, ChartistModule],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
+  entryComponents: [VisitorLoginComponent, VisitorSigninComponent],
 })
 export class LayoutModule {}

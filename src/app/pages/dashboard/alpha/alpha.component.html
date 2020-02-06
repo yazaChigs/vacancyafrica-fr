@@ -1,9 +1,59 @@
+<div class="gutter-example">
+  <div nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="12" *ngFor="let ads of allAdverts" nzSpan="6">
+      <nz-card [nzBordered]="false" [nzLoading]="loading" nzTitle="{{ads.title}}" [nzExtra]="extraTemplate">
+      <nz-comment nzAuthor="{{ads.job}}" [nzDatetime]="time">
+        <nz-avatar
+          nz-comment-avatar
+          nzIcon="user"
+          nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        ></nz-avatar>
+        <nz-comment-content>
+          <p>
+            {{ads.description}}
+          </p>
+        </nz-comment-content>
+        <nz-comment-action>
+          <i
+            nz-tooltip
+            nzTitle="Like"
+            nz-icon
+            nzType="like"
+            [theme]="likes > 0 ? 'twotone' : 'outline'"
+            (click)="like()"
+          ></i>
+          <span class="count like">{{ likes }}</span>
+        </nz-comment-action>
+        <nz-comment-action>
+          <i
+            nz-tooltip
+            nzTitle="Dislike"
+            nz-icon
+            nzType="dislike"
+            [theme]="dislikes > 0 ? 'twotone' : 'outline'"
+            (click)="dislike()"
+          ></i>
+          <span class="count dislike">{{ dislikes }}</span>
+        </nz-comment-action>
+        <nz-comment-action><a [routerLink]="['/forms/view']" [queryParams]="{ formName:ads.formName }" >apply</a> </nz-comment-action>
+        <nz-comment-action>      </nz-comment-action>
+        <nz-comment-action style="flex: 1 1 auto;"><strong>closes: {{ads.endDate   | date}}</strong></nz-comment-action>
+      </nz-comment>
+      <ng-template #extraTemplate>
+        <a>{{ads.companyName !== null ? ads.companyName: "go to company..."}}</a>
+      </ng-template>
+    </nz-card>
+    </div>
+  </div>
+</div>
+
+
 <div class="utils__title utils__title--flat mb-3">
   <strong class="text-uppercase font-size-16">Last Week Statistics</strong>
 </div>
 <div class="row">
   <div class="col-xl-4" *ngFor="let chartCard of chartCardData">
-    <cui-chart-card [title]="chartCard.title" [amount]="chartCard.amount" [chartOptions]="chartCardGraphOptions" [chartData]="chartCard.chartData"></cui-chart-card>
+    <cui-chart-card [title]="chartCard.title" [amount]="chartCard.amount" [chartOptions]="chartCardGraphOptions" [chartData]="chartCard"></cui-chart-card>
   </div>
 </div>
 <div class="row">

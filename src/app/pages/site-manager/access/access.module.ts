@@ -8,8 +8,9 @@ import { ModulesComponent } from './modules/modules.component';
 import { RolesComponent } from './roles/roles.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { SharedComponentModule } from 'src/app/components/shared/shared.component.module';
+import { JobCategoriesComponent } from './job-categories/job-categories.component';
 @NgModule({
   imports: [AccessRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, CleanUIModule, SharedComponentModule],
-  declarations: [ModulesComponent, RolesComponent, PermissionsComponent],
+  declarations: [ModulesComponent, JobCategoriesComponent, RolesComponent, PermissionsComponent],
 })
 export class AccessModule {}

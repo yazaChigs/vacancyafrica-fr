@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'AuthToken';
 const USER_KEY = 'UserData';
 const ROLE_KEY = 'RoleData';
+const USER_TYPE = 'UserType';
 
 @Injectable()
 export class TokenStorage {
@@ -28,6 +29,10 @@ export class TokenStorage {
   public saveUser(user: any) {
     localStorage.removeItem(USER_KEY);
     localStorage.setItem(USER_KEY,  user);
+  }
+  public saveUserType(user: any) {
+    localStorage.removeItem(USER_TYPE);
+    localStorage.setItem(USER_TYPE,  user);
   }
 
   public getToken(): string {

@@ -33,7 +33,9 @@ export class MenuLeftComponent implements OnInit {
   inputValue: string;
   filteredOptions: any[] = [];
   options = [];
-  roles: Array<string>;
+  roles: Array<string> =[];
+  array = [1, 2, 3, 4, 5]
+
   constructor(
     private menuService: MenuService,
     private store: Store<any>,
@@ -43,8 +45,12 @@ export class MenuLeftComponent implements OnInit {
     private token: TokenStorage,
     private permissionsService: NgxPermissionsService,
   ) {
-    this.permissionsService.loadPermissions(this.token.allRoles());
-    this.roles = this.token.allRoles();
+    if(this.token.allRoles()!== null) {
+      this.permissionsService.loadPermissions(this.token.allRoles());
+       this.roles = this.token.allRoles();
+    } else {
+      this.roles.push('ROLE_CLIENT')
+    }
     if ( this.company !== null && this.company !== undefined ) {
       this.isCompanySelected = true;
     }
@@ -71,6 +77,10 @@ export class MenuLeftComponent implements OnInit {
       this.menuTemp = this.menuTemp.filter(t => t.key !== 'administration');
       this.menuData = this.menuTemp.filter(t => t.key !== 'forms');
     }
+  } else {
+    this.menuTemp = menuData;
+    this.menuTemp = this.menuTemp.filter(t => t.key !== 'administration');
+    this.menuData = this.menuTemp.filter(t => t.key !== 'companyForms');
   }
   });
    this.store.pipe(select(Reducers.getSettings)).subscribe(state => {
@@ -88,7 +98,7 @@ export class MenuLeftComponent implements OnInit {
 
 
   activateMenu(url: any, menuData = this.menuData) {
-    if(this.company !== null && this.company !== undefined && this.company !== 'null') {
+      if(this.company !== null && this.company !== undefined && this.company !== 'null') {
     menuData = JSON.parse(JSON.stringify(menuData));
     const pathWithSelection = this.getPath({ url }, menuData, (entry: any) => entry, 'url');
     if (pathWithSelection) {
@@ -96,6 +106,8 @@ export class MenuLeftComponent implements OnInit {
       _.each(pathWithSelection, (parent: any) => (parent.open = true));
     }
     this.menuDataActivated = menuData.slice();
+  }else {
+    this.menuDataActivated = menuData;
   }
   }
 

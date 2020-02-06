@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core'
+import { CrudService } from '../../../shared/service/crud.service';
+import { NzNotificationService } from 'ng-zorro-antd';
+import { distanceInWords } from 'date-fns';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 declare var require: any
 const data: any = require('./data.json')
@@ -6,6 +11,7 @@ const data: any = require('./data.json')
 @Component({
   selector: 'app-dashboard-alpha',
   templateUrl: './alpha.component.html',
+  styleUrls: ['./alpha.component.css'],
 })
 export class DashboardAlphaComponent implements OnInit {
   chartCardData = data.chartCardData
@@ -18,7 +24,14 @@ export class DashboardAlphaComponent implements OnInit {
   displayReferalsData = [...this.referalsData]
   sortNameReferals = null
   sortValueReferals = null
-  constructor() {
+  allAdverts: any[];
+  likes = 0;
+  dislikes = 0;
+  loading = true;
+  time = distanceInWords(new Date(), new Date());
+
+  constructor( private notification: NzNotificationService,private service: CrudService, private datePipe: DatePipe,
+     private router: Router) {
     this.chartCardGraphOptions = {
       options: {
         axisX: {
@@ -52,7 +65,9 @@ export class DashboardAlphaComponent implements OnInit {
       type: 'Line',
     }
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAds();
+  }
 
   sort(sort: { key: string; value: string }): void {
     this.sortNameReferals = sort.key
@@ -74,5 +89,32 @@ export class DashboardAlphaComponent implements OnInit {
     } else {
       this.displayReferalsData = this.referalsData
     }
+  }
+
+  like(): void {
+    this.likes = 1;
+    this.dislikes = 0;
+  }
+
+  dislike(): void {
+    this.likes = 0;
+    this.dislikes = 1;
+  }
+
+  goToForm() {
+    this.router.navigate(['/forms/view'])
+  }
+
+  getAds() {
+    this.service.getAll('/advert/get-all').subscribe(
+      result => {
+        this.allAdverts = result;
+        console.log(this.allAdverts);
+        this.loading = false;
+      },
+      error => {
+        console.log(error.error)
+      }
+    );
   }
 }

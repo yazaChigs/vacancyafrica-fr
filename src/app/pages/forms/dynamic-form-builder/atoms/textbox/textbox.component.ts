@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 // text,email,tel,textarea,password,
 @Component({
-    selector: 'textbox',
+    selector: 'app-textbox',
     templateUrl: './textbox.component.html'
 })
 export class TextBoxComponent {
