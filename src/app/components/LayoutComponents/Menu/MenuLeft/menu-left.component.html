@@ -7,9 +7,10 @@
 <div [ngClass]="isLightTheme ? 'navigation light' : 'navigation'">
   <perfect-scrollbar [ngClass]="isMobileView ? 'scrollbarMobile' : 'scrollbarDesktop'">
     <nz-carousel nzAutoPlay [nzEffect]="'fade'">
-      <div nz-carousel-content *ngFor="let index of array" [ngStyle]="{backgroundImage: 'url(\'assets/images/photos/' + index + '.jpeg\')'}">
+      <!-- <div nz-carousel-content *ngFor="let index of array" [ngStyle]="{backgroundImage: 'url(\'assets/images/photos/' + index + '.jpeg\')'}"> -->
+        <!-- <div nz-carousel-content *ngFor="let index of array" [ngStyle]="{backgroundImage: 'url(\'assets/images/vacancyaf' + index + '.jpg\')'}">
         <h3>{{ index }}</h3>
-      </div>
+      </div> -->
       <!-- <div nz-carousel-content>A</div>
           <div nz-carousel-content>B</div>
           <div nz-carousel-content>C</div>

@@ -5,6 +5,7 @@ import { LayoutModule } from '../components/LayoutComponents/layout.module'
 import { LayoutLoginComponent } from './Login/login.component'
 import { LayoutMainComponent } from './Main/main.component'
 import { LayoutPublicComponent } from './Public/public.component'
+import { SiteManagerModule } from './pages/site-manager/site.module'
 
 const COMPONENTS = [LayoutLoginComponent, LayoutMainComponent, LayoutPublicComponent]
 

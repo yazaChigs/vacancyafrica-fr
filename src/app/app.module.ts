@@ -30,6 +30,9 @@ import { AuthenticateService } from './auth/authenticate.service'
 import { TokenStorage } from './auth/token.storage'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { Interceptor } from './auth/inteceptor'
+import { DashboardComponent } from './layouts/pages/site-manager/dashboard/dashboard.component';
+import { CleanUIModule } from './components/CleanUIComponents/cleanui.module'
+import { SiteManagerModule } from './layouts/pages/site-manager/site.module'
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
   { provide: NZ_I18N, useValue: localeZorro },
@@ -64,6 +67,7 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CleanUIModule,
 
     /**
      * NgRx Store

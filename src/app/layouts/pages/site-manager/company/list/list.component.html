@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-header">
+    <div class="utils__title">
+      <strong>
+        Companies
+      </strong>
+    </div>
+  </div>
+  <div class="card-body">
+    <nz-table #nzTable [nzData]="displayCompanies" [nzLoading]="loading">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th>Thumbnail</th>
+        <th nzShowSort nzSortKey="name">Name</th>
+        <th nzShowSort nzSortKey="description">Description</th>
+        <th nzShowSort nzSortKey="address">Address</th>
+        <th nzShowSort nzSortKey="email">Email</th>
+        <th>Contact</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of nzTable.data">
+
+        <td>
+          <a href="javascript: void(0);" class="cui-product-list-thumbnail">
+            <!-- <img src="{{global.baseUrl + '/api/company/logo/' + item.id}}" /> -->
+          </a>
+        </td>
+        <td>
+          <a class="utils__link--underlined" href="javascript: void(0);">
+            {{item.name}}
+          </a>
+        </td>
+        <td>
+          {{item.description}}
+        </td>
+        <td>
+          {{item?.street}} {{item?.city}} {{item?.stateProvince}} {{item?.country}}
+        </td>
+        <td>
+          {{item.email}}
+        </td>
+        <td>
+          {{item.mobilePhone}} / {{item.officePhone}}
+        </td>
+        <td>
+          <!-- <span [ngClass]="[item.status === 'Disabled' ? 'badge badge-danger font-size-12' : 'badge badge-success font-size-12']">
+            {{item.status}}
+          </span> -->
+        </td>
+        <td>
+          <button nz-button class="mr-1" (click)="edit(item.id)" nzSize="small"><i nz-icon type="edit" theme="outline"></i></button>
+          <button nz-button class="mr-1" (click)="delete(item.id)" nzSize="small"><i nz-icon type="delete" theme="outline"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+

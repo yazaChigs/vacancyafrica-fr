@@ -9,11 +9,11 @@ import { AuthGuard } from 'src/app/components/LayoutComponents/Guard/auth.guard'
 // layouts & notfound
 import { LayoutLoginComponent } from 'src/app/layouts/Login/login.component'
 import { LayoutMainComponent } from 'src/app/layouts/Main/main.component'
-import { NotFoundComponent } from 'src/app/pages/404.component'
+import { NotFoundComponent } from 'src/app/layouts/pages/404.component'
 
 // user
-import { LoginComponent } from 'src/app/pages/user/login/login.component'
-import { ForgotComponent } from 'src/app/pages/user/forgot/forgot.component'
+import { LoginComponent } from 'src/app/layouts/pages/user/login/login.component'
+import { ForgotComponent } from 'src/app/layouts/pages/user/forgot/forgot.component'
 
 const COMPONENTS = [LoginComponent, ForgotComponent, NotFoundComponent]
 
@@ -37,59 +37,59 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: 'src/app/pages/dashboard/dashboard.module#DashboardModule',
+        loadChildren: 'src/app/layouts/pages/dashboard/dashboard.module#DashboardModule',
       },
       {
         path: 'users',
-        loadChildren: 'src/app/pages/users/users.module#UsersModule',
+        loadChildren: 'src/app/layouts/pages/users/users.module#UsersModule',
       },
       {
         path: 'site-manager',
-        loadChildren: 'src/app/pages/site-manager/site.module#SiteManagerModule',
+        loadChildren: 'src/app/layouts/pages/site-manager/site.module#SiteManagerModule',
       },
       {
         path: 'visitor',
-        loadChildren: 'src/app/pages/visitor/visitor.module#VisitorModule',
+        loadChildren: 'src/app/layouts/pages/visitor/visitor.module#VisitorModule',
       },
       {
         path: 'company',
-        loadChildren: 'src/app/pages/site-manager/company/company.module#CompanyModule',
+        loadChildren: 'src/app/layouts/pages/site-manager/company/company.module#CompanyModule',
       },
       {
         path: 'forms',
-        loadChildren: 'src/app/pages/forms/formz.module#FormzModule',
+        loadChildren: 'src/app/layouts/pages/forms/formz.module#FormzModule',
       },
       {
         path: 'blog',
-        loadChildren: 'src/app/pages/blog/blog.module#BlogModule',
+        loadChildren: 'src/app/layouts/pages/blog/blog.module#BlogModule',
       },
       {
         path: 'youtube',
-        loadChildren: 'src/app/pages/youtube/youtube.module#YoutubeModule',
+        loadChildren: 'src/app/layouts/pages/youtube/youtube.module#YoutubeModule',
       },
       {
         path: 'ecommerce',
-        loadChildren: 'src/app/pages/ecommerce/ecommerce.module#EcommerceModule',
+        loadChildren: 'src/app/layouts/pages/ecommerce/ecommerce.module#EcommerceModule',
       },
       {
         path: 'pages',
-        loadChildren: 'src/app/pages/pages/pages.module#PagesModule',
+        loadChildren: 'src/app/layouts/pages/pages/pages.module#PagesModule',
       },
       {
         path: 'github',
-        loadChildren: 'src/app/pages/github/github.module#GithubModule',
+        loadChildren: 'src/app/layouts/pages/github/github.module#GithubModule',
       },
       {
         path: 'icons',
-        loadChildren: 'src/app/pages/icons/icons.module#IconsModule',
+        loadChildren: 'src/app/layouts/pages/icons/icons.module#IconsModule',
       },
       {
         path: 'charts',
-        loadChildren: 'src/app/pages/charts/charts.module#ChartsModule',
+        loadChildren: 'src/app/layouts/pages/charts/charts.module#ChartsModule',
       },
       {
         path: 'layout',
-        loadChildren: 'src/app/pages/layout/layout.module#LayoutModule',
+        loadChildren: 'src/app/layouts/pages/layout/layout.module#LayoutModule',
       },
       { path: '**', component: NotFoundComponent, canActivate: [AuthGuard] },
     ],

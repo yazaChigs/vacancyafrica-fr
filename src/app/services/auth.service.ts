@@ -44,7 +44,7 @@ export class AuthService {
   async SignInVisitor(userName: string, password: string) {
     await this.authenticateService.attemptAuthVisitor(userName, password).subscribe(
       data=> {
-        console.log(data)
+        // console.log(data)
         this.token.signOut();
         // this.token.saveToken(data.token);
         this.token.saveUser(JSON.stringify(data));
@@ -78,6 +78,12 @@ export class AuthService {
           // this.router.navigate(['/dashboard/alpha']);
           this.router.navigate(['/site-manager']);
         } else {
+          if(data.user.company!== null) {
+            sessionStorage.setItem('COMPANY', data.user.company.id);
+            sessionStorage.setItem('C_NAME', data.user.company.name);
+            // sessionStorage.setItem('C_DETAILS', JSON.stringify(data.user.company));
+            window.location.reload();
+          }
 
           this.router.navigate(['/dashboard/alpha']);
         }

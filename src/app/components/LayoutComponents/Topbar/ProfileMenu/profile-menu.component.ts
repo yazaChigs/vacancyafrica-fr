@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { AuthService } from 'src/app/services/auth.service'
 import { Router } from '@angular/router'
-import { VisitorLoginComponent } from '../../../../pages/visitor/visitor-login/visitor-login.component';
+import { VisitorLoginComponent } from '../../../../layouts/pages/visitor/visitor-login/visitor-login.component';
 import { NzDrawerService, NzNotificationService } from 'ng-zorro-antd';
 const TOKEN_KEY = 'AuthToken';
 const USER_KEY = 'UserData';
@@ -31,7 +31,6 @@ export class TopbarProfileMenuComponent {
     private drawerService: NzDrawerService, private notification: NzNotificationService,
     public authService: AuthService) {
     let  userInfo = this.authService.user;
-    console.log(userInfo)
     if (userInfo !== null && userInfo !== undefined) {
       this.userName = userInfo.displayName || userInfo.firstName + ' ' + userInfo.lastName || 'Anonymous'
     this.billingPlan = 'Professional'
@@ -72,10 +71,18 @@ export class TopbarProfileMenuComponent {
   logouClient() {
     this.openComponent()
     if(this.authService.user !== null && this.authService.user !== null) {
-      console.log('looged in');
       this.haveToLogin = false
       this.router.navigate(['/dashboard'])
 
+    }
+  }
+
+  editUserProfile() {
+    let  userInfo = this.authService.user;
+      if(userInfo.userRoles!== null && userInfo.userRoles!== undefined) {
+      this.router.navigate(['/users']);
+    } else {
+      this.router.navigate(['/visitor/edit']);
     }
   }
 

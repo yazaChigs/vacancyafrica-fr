@@ -49,7 +49,7 @@ export class MenuLeftComponent implements OnInit {
       this.permissionsService.loadPermissions(this.token.allRoles());
        this.roles = this.token.allRoles();
     } else {
-      this.roles.push('ROLE_CLIENT')
+      this.roles.push('VISITOR')
     }
     if ( this.company !== null && this.company !== undefined ) {
       this.isCompanySelected = true;

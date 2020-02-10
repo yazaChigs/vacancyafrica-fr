@@ -37,7 +37,7 @@
     </li>
     <li nz-menu-divider></li>
     <li nz-menu-item>
-      <a href="javascript: void(0);" [routerLink]="['/visitor/edit']" routerLinkActive="router-link-active" >
+      <a href="javascript: void(0);" (click)="editUserProfile()" >
         <i class="menuIcon icmn-user"></i>
         Edit Profile
       </a>
