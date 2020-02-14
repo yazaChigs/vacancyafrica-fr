@@ -39,6 +39,7 @@ export class UserComponent implements OnInit {
   }
   ngAfterViewInit() {
     if (this.id !== undefined && this.id !== null) {
+      console.log(this.id)
       this.getUser();
    }
   }

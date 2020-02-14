@@ -65,6 +65,13 @@ export class CreateFormComponent implements OnInit {
       title: new FormControl('', Validators.required),
       job: new FormControl('', Validators.required),
       companyName: new FormControl(this.companyName, Validators.required),
+      showCompanyName: new FormControl(),
+      salary: new FormControl(),
+      salaryPrefix: new FormControl('$'),
+      showSalary: new FormControl(),
+      showBenefits: new FormControl(),
+      countryOfPlacement: new FormControl(),
+      benefits: new FormControl(),
       category: new FormControl(null, Validators.required),
       formName : new FormControl(null, Validators.required),
       description: new FormControl('', Validators.required),
@@ -229,7 +236,7 @@ export class CreateFormComponent implements OnInit {
     );
   }
   getAllFormsList() {
-    this.service.getAll('/create-form/get-all').subscribe(
+    this.service.getAll('/create-form/get-all-by-company').subscribe(
       result => {
         console.log(result)
         // this.options = result;
@@ -247,7 +254,6 @@ export class CreateFormComponent implements OnInit {
     const baseType = BaseNameType;
     this.baseNameService.getAll(baseType[BaseNameType.CATEGORY]).subscribe(
       result => {
-        console.log(result.list)
         this.categoryList = result.list;
       },
       error => {
@@ -268,7 +274,6 @@ export class CreateFormComponent implements OnInit {
     if (this.selectedValue !== null && this.selectedValue !== undefined) {
     this.service.getItem('/create-form/get/' + this.selectedValue).subscribe(
       result => {
-        console.log(result.category);
         this.adForm.controls['job'].setValue(result.jobName);
         this.adForm.controls['category'].setValue( result.category);
         this.adForm.controls['startDate'].setValue(result.startDate);

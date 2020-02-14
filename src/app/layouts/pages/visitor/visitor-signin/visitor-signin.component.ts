@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, UploadFile } from 'ng-zorro-antd';
 import { BaseNameService } from 'src/app/shared/service/basename.service';
 import { CrudService } from 'src/app/shared/service/crud.service';
 
@@ -18,6 +18,7 @@ export class VisitorSigninComponent implements OnInit {
   isSaveLoading: boolean;
   duplicate: boolean;
 
+
   constructor( private router: Router,
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute,
@@ -29,6 +30,7 @@ export class VisitorSigninComponent implements OnInit {
     // this.validateForm = this.fb.group({})
     this.createForm();
   }
+
 
   changeBackground(): void {
     if (this.backgroundNumber === 5) {

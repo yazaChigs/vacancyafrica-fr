@@ -31,4 +31,13 @@ export class CrudService implements BaseService {
     return this.http.post<any>(this.baseUrl + url, formData);
   }
 
+  public saveFiles(files, url: string, id: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('files', files);
+    formData.append('id', id);
+    console.log(files)
+    console.log(formData)
+    return this.http.post<any>(this.baseUrl + url, formData);
+  }
+
 }

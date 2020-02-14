@@ -70,11 +70,29 @@
                         </div>
                         <div class="col-lg-6">
                           <nz-form-item>
+                            <nz-form-label nzFor="website">Website</nz-form-label>
+                            <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                              <input nz-input formControlName="website" type="website" id="website" placeholder="website">
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                        <div class="col-lg-6">
+                          <nz-form-item>
                             <nz-form-label nzFor="fax">Fax</nz-form-label>
                             <nz-form-control>
                               <input nz-input formControlName="fax" type="text" id="fax" placeholder="Fax">
                             </nz-form-control>
                           </nz-form-item>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                        <nz-form-item>
+                          <nz-form-label nzFor="aboutUs">About Us</nz-form-label>
+                          <nz-form-control>
+                            <textarea rows="3" nz-input id="aboutUs" formControlName="aboutUs"></textarea>
+                          </nz-form-control>
+                        </nz-form-item>
                         </div>
                       </div>
 

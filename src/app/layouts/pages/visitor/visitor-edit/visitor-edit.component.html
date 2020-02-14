@@ -1,3 +1,5 @@
+<nz-tabset>
+  <nz-tab nzTitle="Profile">
 <form nz-form nzLayout="'vertical'" [formGroup]="form" (submit)="submit(form.value)">
   <nz-card nzType="inner" nzTitle="CREATE APPLICATION FORM">
 <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
@@ -28,9 +30,16 @@
           <div nz-col nzSpan="8">
             <nz-form-item>
               <nz-form-control>
-                  <input formControlName="userName" nz-input PlaceHolder="User Name">
+                  <input formControlName="dateOfBirth" nz-input PlaceHolder="D.O.B">
                 </nz-form-control>
             </nz-form-item>
+            </div>
+            <div nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control>
+                  <input formControlName="idNumber" nz-input PlaceHolder="ID Number">
+                </nz-form-control>
+              </nz-form-item >
             </div>
           <div nz-col nzSpan="8">
             <nz-form-item>
@@ -43,18 +52,26 @@
             </nz-form-item >
           </div>
           </div>
+
           <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
             <div nz-col nzSpan="8">
               <nz-form-item>
                 <nz-form-control>
-                  <input nz-input formControlName="mobilePhone" type="text" id="mobilePhone" placeholder="Mobile Number">
+                    <input formControlName="userName" nz-input PlaceHolder="User Name">
+                  </nz-form-control>
+              </nz-form-item>
+              </div>
+            <div nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control>
+                  <input nz-input formControlName="mobilePhone" type="text" placeholder="Mobile Number">
                 </nz-form-control>
               </nz-form-item>
             </div>
             <div nz-col nzSpan="8">
               <nz-form-item>
                 <nz-form-control>
-                  <input nz-input formControlName="officePhone" type="text" id="officePhone" placeholder="Office Phone">
+                  <input nz-input formControlName="officePhone" type="text"  placeholder="Office Phone">
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -96,10 +113,11 @@
                   </nz-form-item>
               </div>
               </div>
+
               <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
                 <div nz-col nzSpan="8">
                   <nz-form-item>
-                    <nz-form-control nzErrorTip="Modules Required">
+                    <nz-form-control nzErrorTip="categories Required">
                       <nz-select formControlName="jobCategory"  nzPlaceHolder="Choose Job Category" [compareWith]="compareFn">
                         <nz-option  *ngFor="let item of categoryList" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
                         </nz-select>
@@ -114,25 +132,122 @@
                   </nz-form-item>
                 </div>
                 </div>
+                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                  <div nz-col nzSpan="16">
+                    <nz-form-item>
+                      <nz-form-control>
+                          <textarea formControlName="experience" nz-input PlaceHolder="experiences (in current role and placement)"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+                    </div>
+                  </div>
+                  <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                    <div nz-col nzSpan="24">
+                      <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="aboutVisitor" nz-input PlaceHolder="tell us About yourself..."></textarea>
+                          </nz-form-control>
+                      </nz-form-item>
+                      </div>
+                    </div>
+                <nz-divider nzText="Skills" nzOrientation="left"></nz-divider>
+                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                  <div formArrayName="skills" *ngFor="let a of form.get('skills')['controls']; let j = index">
+                    <div [formGroupName]="j" style="margin-bottom: 10px;">
+                      <div nz-col nzSpan="15">
+                    <input nz-input type="text" placeholder="Add skill..." name="skill" formControlName="skill">
+                      </div>
+                      <div nz-col nzSpan="5">
+                        <button nz-button nzType="link" type="button" (click)="addSkill()" style="top: -10px;"><i nz-icon nzType="plus"></i></button>
+                        <button nz-button nzType="link" type="button" (click)="removeSkill(j)" style="top: -10px;" ><i nz-icon nzType="minus"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
+                <nz-divider nzText="Certificates" nzOrientation="left"></nz-divider>
+                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                  <div formArrayName="certificates" *ngFor="let a of form.get('certificates')['controls']; let k = index">
+                    <div [formGroupName]="k" style="margin-bottom: 10px;">
+                      <div nz-col nzSpan="15">
+                        <input nz-input type="text" placeholder="Add certificates..." name="certificate" formControlName="certificate">
+                      </div>
+                        <div nz-col nzSpan="5">
+                          <button nz-button nzType="link" type="button" (click)="addCertificate()" style="top: -10px;"><i nz-icon nzType="plus"></i></button>
+                          <button nz-button nzType="link" type="button" (click)="removeCertificates(k)" style="top: -10px;" ><i nz-icon nzType="minus"></i></button>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+
+                <nz-divider nzText="References" nzOrientation="left"></nz-divider>
+                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                  <div formArrayName="references" *ngFor="let a of form.get('references')['controls']; let i = index">
+                    <div [formGroupName]="i" style="margin-bottom: 10px;">
+                      <div nz-col nzSpan="5">
+                        <input nz-input type="text" placeholder="fullName" name="refName" formControlName="refName">
+                      </div>
+                        <div nz-col nzSpan="5">
+                        <input nz-input type="text" placeholder="Phone" name="refPhone" formControlName="refPhone">
+                      </div>
+                        <div nz-col nzSpan="5">
+                        <input nz-input type="text" placeholder="Email" name="refEmail" formControlName="refEmail">
+                      </div>
+                        <div nz-col nzSpan="5">
+                        <input nz-input type="text" placeholder="Address" name="refAddress" formControlName="refAddress">
+                      </div>
+                    </div>
+                    <div>
+                      <button nz-button nzType="link" type="button" (click)="addItem()" style="top: -10px;"><i nz-icon nzType="plus"></i></button>
+                      <button nz-button nzType="link" type="button" (click)="removePhone(i)" style="top: -10px;" ><i nz-icon nzType="minus"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+
+                <nz-divider nzDashed nzText="upload files and documents" nzOrientation="left">
+                </nz-divider>
+                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                  <div nz-col nzSpan="8">
+                    <nz-switch [(ngModel)]="switchValue" formControlName="filesPublic"></nz-switch>
+</div></div>
                 <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
                   <div nz-col nzSpan="16">
-                    <nz-upload
-      nzType="drag"
-      [nzMultiple]="true"
-      [nzLimit]="2"
-      nzAction="https://jsonplaceholder.typicode.com/posts/"
-      (nzChange)="handleChange($event)"
-    >
-      <p class="ant-upload-drag-icon">
-        <i nz-icon nzType="inbox"></i>
-      </p>
-      <p class="ant-upload-text">Click or drag file to this area to upload</p>
-      <p class="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
-      </p>
+    <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+      <button type="button" [nzType]="'default'" nz-button><i nz-icon nzType="upload"></i>Select File</button>
     </nz-upload>
-                  </div></div>
+                  </div>
+    <div nz-col nzSpan="8">
+    <button
+      nz-button
+      [nzType]="'primary'"
+      [nzLoading]="uploading"
+      (click)="handleUpload()"
+      [disabled]="fileList.length == 0"
+      style="margin-top: 16px"
+      type="button"
+    >
+      {{ uploading ? 'Uploading' : 'Start Upload' }}
+    </button>
+
+  </div>
+                  </div>
+                  <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+                    <div nz-col nzSpan="16">
+    <nz-list [nzDataSource]="avalailableFiles" [nzRenderItem]="defaultItem">
+      <ng-template #defaultItem let-item>
+        <nz-list-item>
+          <a href="{{global.baseUrl}}/api/visitor/get-file/{{item}}/{{authService.user.id}}">
+
+            <span nz-text nzType="warning"><u> {{ item }}</u></span>
+          </a>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+                    </div>
+                    </div>
+                <nz-divider nzDashed></nz-divider>
+
 
 
               <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
@@ -172,3 +287,8 @@
               </div>
         </nz-card>
         </form>
+        <!-- {{form.value | json}} -->
+</nz-tab>
+<nz-tab nzTitle="Logo">
+ <app-visitor-logo></app-visitor-logo>
+</nz-tab>

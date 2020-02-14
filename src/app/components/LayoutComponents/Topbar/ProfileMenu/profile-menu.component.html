@@ -1,7 +1,7 @@
 <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'" (nzVisibleChange)="badgeCountIncrease()">
   <a nz-dropdown class="dropdown">
     <nz-badge [nzCount]="badgeCount">
-      <nz-avatar nzIcon="user" [nzShape]="'square'" [nzSize]="'large'" class="avatar"></nz-avatar>
+      <nz-avatar [nzShape]="'square'" nzIcon="user" nzSrc="{{imageLink}}" [nzSize]="'large'" class="avatar"></nz-avatar>
     </nz-badge>
   </a>
   <div *ngIf="!haveToLogin">

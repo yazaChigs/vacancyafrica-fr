@@ -3,18 +3,20 @@ import { CropperComponent } from 'angular-cropperjs';
 import { CrudService } from 'src/app/shared/service/crud.service';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { Global } from 'src/app/global';
+import { TokenStorage } from '../../../../auth/token.storage';
 
 @Component({
-  selector: 'app-logo',
-  templateUrl: './logo.component.html',
-  styleUrls: ['./logo.component.scss'],
+  selector: 'app-visitor-logo',
+  templateUrl: './visitor-logo.component.html',
+  styleUrls: ['./visitor-logo.component.scss'],
 })
 
-export class LogoComponent implements OnInit {
+export class VisitorLogoComponent implements OnInit {
 
   cropperRes: string;
   showCropper: boolean;
   companyId = localStorage.getItem('IMAGE_ID');
+  userID = JSON.parse(this.token.getUser()).id;
   cropperConfig: object = {
     // minCropBoxHeight: 100,
     // minCropBoxWidth: 100,
@@ -28,11 +30,12 @@ export class LogoComponent implements OnInit {
      checkCrossOrigin: true,
    };
   imageUrl: any;
-  imageLink = this.global.baseUrl  + '/api/company/logo/' + this.companyId;
+  imageLink = this.global.baseUrl  + '/api/visitor/logo/' + this.userID;
   @ViewChild('angularCropper', { static: false })
   public angularCropper: CropperComponent;
 
-  constructor(private service: CrudService, private notification: NzNotificationService, public global: Global) {}
+  constructor(private service: CrudService, private token: TokenStorage,
+     private notification: NzNotificationService, public global: Global) {}
 
   ngOnInit() {
     this.refreshCrop(this.imageLink);
@@ -42,7 +45,7 @@ export class LogoComponent implements OnInit {
     const that = this;
     if (event.target.files && event.target.files[0]) {
       let fileName: File = event.target.files[0].name;
-      console.log(fileName);
+      // console.log(fileName);
       const reader = new FileReader();
       that.showCropper = false;
       reader.onload = (eventCurr: ProgressEvent) => {
@@ -128,12 +131,12 @@ export class LogoComponent implements OnInit {
     });
   }
   saveImage(blob: Blob) {
-    const id = localStorage.getItem('IMAGE_ID');
-    console.log(id);
-    console.log(blob.type);
-    this.service.saveImage(blob, '/company/image', id).subscribe(
+    // const id = localStorage.getItem('IMAGE_ID');
+    // console.log(id);
+    console.log(blob);
+    this.service.saveImage(blob, '/visitor/image', this.userID).subscribe(
       result => {
-        console.log(result);
+        // console.log(result);
         this.notification.info(
           'Notification',
            result.message,

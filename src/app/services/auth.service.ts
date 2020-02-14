@@ -66,6 +66,7 @@ export class AuthService {
   async SignIn(userName: string, password: string) {
     await this.authenticateService.attemptAuth(userName, password).subscribe(
       data => {
+        console.log(data)
         this.token.saveToken(data.token);
         this.token.saveUser(JSON.stringify(data.user));
         if (data.company !== null && data.company !== undefined) {
@@ -79,13 +80,13 @@ export class AuthService {
           this.router.navigate(['/site-manager']);
         } else {
           if(data.user.company!== null) {
-            sessionStorage.setItem('COMPANY', data.user.company.id);
-            sessionStorage.setItem('C_NAME', data.user.company.name);
+            sessionStorage.setItem('COMPANY', data.company.id);
+            sessionStorage.setItem('C_NAME', data.company.name);
             // sessionStorage.setItem('C_DETAILS', JSON.stringify(data.user.company));
-            window.location.reload();
+            // window.location.reload();
           }
 
-          this.router.navigate(['/dashboard/alpha']);
+          this.router.navigate(['/dashboard']);
         }
         this.notification.success(
               'Logged In',

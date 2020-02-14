@@ -12,9 +12,11 @@ import { SharedComponentModule } from 'src/app/components/shared/shared.componen
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
 @NgModule({
   imports: [CompanyRoutingModule, FormsModule,CommonModule, ReactiveFormsModule, SharedModule, CleanUIModule,
-     SharedComponentModule, AngularCropperjsModule, NgZorroAntdModule.forRoot(),],
+     SharedComponentModule, AngularCropperjsModule, NgZorroAntdModule.forRoot(),LayoutModule],
   declarations: [ListComponent, NewCompanyComponent, LogoComponent],
+  exports:[ NewCompanyComponent]
 })
 export class CompanyModule {}

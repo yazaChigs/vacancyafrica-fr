@@ -1,14 +1,29 @@
 <div class="topbar">
   <div class="mr-4 d-none d-sm-inline">
     <!-- <cui-topbar-issues-history></cui-topbar-issues-history> -->
-    <button nz-button nzType="primary" routerLink="/dashboard" routerLinkActive="router-link-active">JOBS</button>
+    <nz-dropdown>
+      <button nz-button nzType="primary"  nz-dropdown>JOBS</button>
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item *ngFor="let form of listOfForms">
+          <a>{{form.jobName.toUpperCase()}}</a>
+        </li>
+      </ul>
+    </nz-dropdown>
+
   </div>
   <div class="mr-4">
     <!-- <cui-topbar-project-management></cui-topbar-project-management> -->
     <button nz-button nzType="primary" routerLink="/site-manager/company/new" routerLinkActive="router-link-active">COMPANIES</button>
   </div>
   <div class="mr-4">
-    <button nz-button nzType="primary" routerLink="/site-manager" routerLinkActive="router-link-active">CATEGORIES</button>
+    <nz-dropdown>
+      <button nz-button nzType="primary" nz-dropdown> CATEGORIES<i nz-icon type="down"></i> </button>
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item *ngFor="let cat of categoryList">
+          <a>{{cat.name.toUpperCase()}}</a>
+        </li>
+      </ul>
+    </nz-dropdown>
   </div>
   <div class="mr-4">
     <button nz-button nzType="primary" routerLink="/forms/view" routerLinkActive="router-link-active">APPLY</button>

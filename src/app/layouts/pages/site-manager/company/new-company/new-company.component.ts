@@ -18,7 +18,7 @@ export class NewCompanyComponent implements OnInit {
 
 
 
-
+  imagePath = '/api/company/logo/'
   modules: Array<any> = [];
   loading = true;
   form: FormGroup;
@@ -27,12 +27,12 @@ export class NewCompanyComponent implements OnInit {
   company: any;
   id: string;
   compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
-  // @Output() addUserDetails = new EventEmitter();
-  // @Output() companyDetails = new EventEmitter();
+
   constructor( private baseNameService: BaseNameService, private fb: FormBuilder, private router: Router,
                private activatedRouter: ActivatedRoute,
                private notification: NzNotificationService, private companyService: CrudService) {
                 this.id = this.activatedRouter.snapshot.params.id;
+                console.log(this.id)
                }
 
   ngOnInit() {
@@ -77,6 +77,8 @@ export class NewCompanyComponent implements OnInit {
       description: [null],
       mobilePhone: [null],
       officePhone: [null],
+      website: [null],
+      aboutUs: [null],
       stateProvince: [null],
       city: [null],
       street: [null],
@@ -132,6 +134,7 @@ export class NewCompanyComponent implements OnInit {
     }
   }
   getCompany() {
+    console.log(this.id)
     this.companyService.getItem('/company/get-item/' + this.id).subscribe(
       result => {
           this.edit(result);
@@ -152,6 +155,8 @@ export class NewCompanyComponent implements OnInit {
     this.form.get('uuid').setValue(data.uuid);
     this.form.get('name').setValue(data.name);
     this.form.get('description').setValue(data.description);
+    this.form.get('website').setValue(data.website);
+    this.form.get('aboutUs').setValue(data.aboutUs);
     this.form.get('mobilePhone').setValue(data.mobilePhone);
     this.form.get('officePhone').setValue(data.officePhone);
     this.form.get('stateProvince').setValue(data.stateProvince);

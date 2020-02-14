@@ -9,11 +9,14 @@ import { CleanUIModule } from 'src/app/components/CleanUIComponents/cleanui.modu
 import { VisitorEditComponent } from './visitor-edit/visitor-edit.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { VisitorRoutingModule } from './visitor-routing.module';
+import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
+import { VisitorLogoComponent } from './visitor-logo/visitor-logo.component';
+import { AngularCropperjsModule } from 'angular-cropperjs';
 @NgModule({
   imports: [VisitorRoutingModule,  FormsModule, ReactiveFormsModule, SharedModule, CleanUIModule,
-    CommonModule,  NgZorroAntdModule.forRoot(),],
-  declarations: [ VisitorLoginComponent, VisitorSigninComponent, VisitorEditComponent ],
-  exports: [VisitorLoginComponent, VisitorSigninComponent, VisitorEditComponent ],
+    CommonModule, AngularCropperjsModule,  NgZorroAntdModule.forRoot(), ],
+  declarations: [ VisitorLoginComponent, VisitorSigninComponent, VisitorEditComponent, VisitorProfileComponent, VisitorLogoComponent ],
+  exports: [VisitorLoginComponent, VisitorSigninComponent, VisitorEditComponent, VisitorProfileComponent, VisitorProfileComponent],
   entryComponents: [VisitorLoginComponent, VisitorSigninComponent],
 
 })

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { VisitorSigninComponent } from './visitor-signin/visitor-signin.component';
 import { VisitorEditComponent } from './visitor-edit/visitor-edit.component';
+import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -15,18 +16,15 @@ const routes: Routes = [
     data: { title: 'Register' },
   },
   {
+    path: 'profile/:id',
+    component: VisitorProfileComponent,
+    data: { title: 'Register' },
+  },
+  {
     path: 'edit',
     component: VisitorEditComponent,
     data: { title: 'edit info' },
   },
-  // {
-  //   path: 'company',
-  //   loadChildren: './company/company.module#CompanyModule',
-  // },
-  // {
-  //   path: 'access',
-  //   loadChildren: './access/access.module#AccessModule',
-  // }
 ];
 
 @NgModule({

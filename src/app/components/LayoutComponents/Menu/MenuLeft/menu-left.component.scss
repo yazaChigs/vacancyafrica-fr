@@ -1,18 +1,29 @@
 @import 'src/assets/styles/mixins.scss';
 
 .logo {
-  height: 64px;
-  background: $menuBg-darken;
+  height:100px;
+  // background: $menuBg-darken;
+  background: white;
   overflow: hidden;
 }
 
 .logoContainer {
-  height: 64px;
-  padding: 13px 20px 15px 22px;
+  height: 100px;
+  // padding: 0px 20px 0px 22px;
   img {
-    height: 36px;
+    height: 100%;
   }
-}
+  background-size: contain;
+  background-repeat: no-repeat;}
+
+  .smallLogoContainer {
+  height: 75px;
+  // padding: 0px 20px 0px 22px;
+  img {
+    height: 100%;
+  }
+  background-size: contain;
+  background-repeat: no-repeat;}
 
 .icon {
   text-align: center;
@@ -23,6 +34,15 @@
   margin: 0 !important;
   line-height: 1 !important;
   color: $text;
+}
+.companylogoContainer {
+  bottom: 0px;
+}
+.companylogoContainer img {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 
 .navigation {

@@ -80,6 +80,12 @@ export class ApplicationsComponent implements OnInit {
 
   }
 
+  viewApplicantProfile(id) {
+    console.log(id)
+    this.router.navigateByUrl('/visitor/profile/' + id);
+
+  }
+
 
 
   delete(value) {

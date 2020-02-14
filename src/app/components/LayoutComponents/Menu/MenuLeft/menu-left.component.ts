@@ -11,6 +11,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
 import { AuthenticateService } from 'src/app/auth/authenticate.service';
 import { TokenStorage } from 'src/app/auth/token.storage';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { Global } from '../../../../global';
 
 @Component({
   selector: 'cui-menu-left',
@@ -29,6 +30,7 @@ export class MenuLeftComponent implements OnInit {
   company = sessionStorage.getItem('COMPANY');
   companyName = sessionStorage.getItem('C_NAME');
   isCompanySelected = false;
+  imageLink = this.global.baseUrl  + '/api/company/logo/' + this.company;
   menuTemp: any[]
   inputValue: string;
   filteredOptions: any[] = [];
@@ -44,6 +46,7 @@ export class MenuLeftComponent implements OnInit {
     private notification: NzNotificationService,
     private token: TokenStorage,
     private permissionsService: NgxPermissionsService,
+    private global: Global,
   ) {
     if(this.token.allRoles()!== null) {
       this.permissionsService.loadPermissions(this.token.allRoles());
@@ -82,6 +85,11 @@ export class MenuLeftComponent implements OnInit {
     this.menuTemp = this.menuTemp.filter(t => t.key !== 'administration');
     this.menuData = this.menuTemp.filter(t => t.key !== 'companyForms');
   }
+  // const userData =  JSON.parse(this.token.getUser())
+  // if (userData !== null && userData !== undefined && !this.roles.includes('ROLE_GLOBAL')) {
+  //   sessionStorage.setItem('COMPANY', userData.companyId);
+  // sessionStorage.setItem('C_NAME', userData.companyName);
+  // }
   });
    this.store.pipe(select(Reducers.getSettings)).subscribe(state => {
       this.isLightTheme = state.isLightTheme;
@@ -94,6 +102,22 @@ export class MenuLeftComponent implements OnInit {
         this.activateMenu(event.url ? event.url : null);
       });
    this.getCompanies();
+  }
+
+  isVisitor():boolean {
+   if ( sessionStorage.getItem('C_NAME') === null && localStorage.getItem('UserType')!== null ){
+     return false;
+   } else {
+     return true;
+   }
+  }
+
+  getUserCompany(value) {
+    this.service.getItem(value).subscribe(
+      result => {
+
+      }
+    );
   }
 
 
@@ -110,6 +134,8 @@ export class MenuLeftComponent implements OnInit {
     this.menuDataActivated = menuData;
   }
   }
+
+
 
   getPath(
     element: any,

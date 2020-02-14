@@ -1,5 +1,7 @@
 <div class="card">
     <div class="card-body">
+      <nz-tabset [nzType]="'line'">
+        <nz-tab nzTitle="Profile">
       <h4 class="text-black mb-3">
         <strong>Main Parameters</strong>
       </h4>
@@ -203,7 +205,11 @@
 
         </div>
       </form>
-
+</nz-tab>
+<nz-tab nzTitle="Logo">
+  <app-user-logo></app-user-logo>
+</nz-tab>
+</nz-tabset>
 
     </div>
   </div>

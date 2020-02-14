@@ -1,9 +1,13 @@
 <div class="logo">
-  <div class="logoContainer">
-    <img *ngIf="!isMenuCollapsed" src="assets/images/logo-inverse.png" alt="" />
-    <img *ngIf="isMenuCollapsed" src="assets/images/logo-inverse-mobile.png" alt="" />
+  <div *ngIf="!isMenuCollapsed"  class="logoContainer">
+    <img src="assets/images/vacancyafricalogo.png" alt="" />
+  </div>
+  <div *ngIf="isMenuCollapsed" class="smallLogoContainer">
+    <img  src="assets/images/vacancyafricalogo-small.png" alt="" />
   </div>
 </div>
+<!-- <nz-divider></nz-divider> -->
+
 <div [ngClass]="isLightTheme ? 'navigation light' : 'navigation'">
   <perfect-scrollbar [ngClass]="isMobileView ? 'scrollbarMobile' : 'scrollbarDesktop'">
     <nz-carousel nzAutoPlay [nzEffect]="'fade'">
@@ -86,5 +90,11 @@
         Use Vimbika for $$$
       </a>
     </div> -->
-  </perfect-scrollbar>
+    <!-- <div class="companylogo"> -->
+      <div *ngIf="isVisitor()" class="companylogoContainer">
+        <img *ngIf="!isMenuCollapsed" [src]="imageLink" alt="" />
+      <!-- <img *ngIf="isMenuCollapsed" src="assets/images/vacancyafricalogo-small.png" alt="" /> -->
+    </div>
+  <!-- </div> -->
+</perfect-scrollbar>
 </div>

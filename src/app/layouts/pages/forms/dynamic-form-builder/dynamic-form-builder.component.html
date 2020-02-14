@@ -4,25 +4,31 @@
   <!-- <input type="hidden formC" -->
   <div nz-row nzJustify="center">
     <div nz-col nzSpan="8">
+      <nz-form-label><u>Name</u></nz-form-label>
       <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.formName}}</h3>
     </div>
     <div nz-col nzSpan="8">
+      <nz-form-label><u>Company</u></nz-form-label>
       <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.companyName}}</h3>
     </div>
     <div nz-col nzSpan="8">
+      <nz-form-label><u>Job</u></nz-form-label>
       <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.jobName}}</h3>
     </div>
   </div>
     <nz-divider></nz-divider>
   <div nz-row nzJustify="center">
     <div nz-col nzSpan="8">
-      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">CATEGORIES:{{formData?.category}}</h3>
+      <nz-form-label><u>Categories</u></nz-form-label>
+      <h3 *ngFor="let cat of categoriesStringArray" text-black mt-2 mb-3 nz-title nzType="secondary">{{cat}}</h3>
     </div>
     <div nz-col nzSpan="8">
-      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">startDate:{{formData?.startDate   | date}}</h3>
+      <nz-form-label><u>Start Date</u></nz-form-label>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.startDate   | date}}</h3>
     </div>
     <div  nz-col nzSpan="8">
-      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">endDate:{{formData?.endDate   | date}}</h3>
+      <nz-form-label><u>End Date</u></nz-form-label>
+      <h3 text-black mt-2 mb-3 nz-title nzType="secondary">{{formData?.endDate   | date}}</h3>
     </div>
   </div>
   <nz-divider></nz-divider>
@@ -53,7 +59,7 @@
                         <div nz-col nzSpan="8">
                                  <nz-form-item class="full-width" appearance="outline">
                                    <nz-form-control>
-                                        <nz-date-picker  formControlName="dateOfBirth" placeholder="DOB" ></nz-date-picker>
+                                        <nz-date-picker  formControlName="dateOfBirth" nzPlaceHolder="DOB" ></nz-date-picker>
                                       </nz-form-control>
                                     </nz-form-item>
                                     </div>
@@ -84,6 +90,13 @@
   <div *ngFor="let field of fields">
       <field-builder [field]="field" [form]="form"></field-builder>
   </div>
+  <div nz-row nzType="flex" nzJustify="end" [nzGutter]="8" style="margin-top: 10px;">
+    <div nz-col nzSpan="8">
+      <nz-form-label>Company can view you files:</nz-form-label>
+    </div>
+    <div nz-col nzSpan="4">
+      <nz-switch  formControlName="filesPublic"></nz-switch>
+</div></div>
   <div nz-row>
     <div nz-col nzSpan="4"></div>
     <div nz-col nzSpan="4">

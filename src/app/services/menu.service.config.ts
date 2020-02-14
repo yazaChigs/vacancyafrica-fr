@@ -1,9 +1,14 @@
 export const getLeftMenuData: any[] = [
   {
-    title: 'Settings',
-    key: 'settings',
-    icon: 'icmn icmn-cog utils__spin-delayed--pseudo-selector',
+    divider: true,
   },
+  {
+    title: 'Dashboard',
+    key: 'dashboardAlpha',
+    url: '/dashboard/alpha',
+    icon: 'icmn icmn-home',
+  },
+
   {
     title: 'Documentation',
     key: 'documentation',
@@ -68,13 +73,37 @@ export const getLeftMenuData: any[] = [
     ],
   },
   {
+    title: 'Company',
+    key: 'company',
+    icon: 'icmn icmn-file-text',
+    children: [
+      {
+        key: 'company-details',
+        title: 'Company Details',
+        url: '/site-manager/company/edit/null',
+        pro: true,
+      },
+      {
+        key: 'users',
+        title: 'Users',
+        url: '/users',
+        pro: true,
+      },
+      {
+        key: 'contcts',
+        title: 'Company contacts',
+        url: '/site-manager/contacts',
+        pro: true,
+      },
+    ],
+  },
+  {
     divider: true,
   },
   {
-    title: 'Dashboard',
-    key: 'dashboardAlpha',
-    url: '/dashboard/alpha',
-    icon: 'icmn icmn-home',
+    title: 'Settings',
+    key: 'settings',
+    icon: 'icmn icmn-cog utils__spin-delayed--pseudo-selector',
   },
   // {
   //   title: 'Dashboard Beta',

@@ -361,12 +361,12 @@
             </div>
 
           </div>
-          <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+          <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
             <div nz-col nzSpan="12" >
           <nz-form-item>
-            <nz-form-label>Company</nz-form-label>
+            <nz-form-label>Country of placement</nz-form-label>
             <nz-form-control>
-              <input nz-input placeholder="company name" formControlName="companyName">
+              <input nz-input placeholder="Country Of Placement" formControlName="countryOfPlacement">
             </nz-form-control>
           </nz-form-item>
           </div>
@@ -414,6 +414,64 @@
               <textarea nz-input placeholder="Description" formControlName="description"></textarea>
             </nz-form-control>
           </nz-form-item>
+          <nz-divider nxText="Optional information"></nz-divider>
+
+          <div nz-row nzType="flex" nxJustify="center" [nzGutter]="8">
+            <div  nz-col nzSpan="5"><nz-form-label>Company Name:</nz-form-label></div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control>
+                  <input nz-input placeholder="Company Name" formControlName="companyName">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control><nz-switch  formControlName="showCompanyName" name="showCompanyName"></nz-switch></nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row nzType="flex" nxJustify="center" [nzGutter]="8">
+            <div  nz-col nzSpan="5"><nz-form-label>Benefits:</nz-form-label></div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control>
+                  <input nz-input placeholder="Benefits" formControlName="benefits">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control><nz-switch formControlName="showBenefits" name="showBenefits"></nz-switch></nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row nzType="flex" nxJustify="center" [nzGutter]="8">
+            <div  nz-col nzSpan="5"><nz-form-label>Salary:</nz-form-label></div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <!-- <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="salary">Salary</nz-form-label> -->
+                <nz-form-control>
+                  <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                    <ng-template #addOnBeforeTemplate>
+                      <nz-select formControlName="salaryPrefix" class="phone-select">
+                        <nz-option nzLabel="$" nzValue="$"></nz-option>
+                        <nz-option nzLabel="£" nzValue="£"></nz-option>
+                        <nz-option nzLabel="¥" nzValue="¥"></nz-option>
+                      </nz-select>
+                    </ng-template>
+                    <input formControlName="salary" id="'salary'" nz-input />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div  nz-col nzSpan="8">
+              <nz-form-item>
+                <nz-form-control><nz-switch  formControlName="showSalary" name="showSalary"></nz-switch></nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
           <nz-form-item>
             <nz-form-label>Type</nz-form-label>
             <nz-form-control>

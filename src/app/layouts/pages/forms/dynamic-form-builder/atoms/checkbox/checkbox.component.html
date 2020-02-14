@@ -2,7 +2,7 @@
   <div [formGroupName]="field.name" >
     <div *ngFor="let opt of field.options" class="form-check form-check">
     <label class="form-check-label">
-       <input [formControlName]="opt.key" class="form-check-input" type="checkbox" id="opt.key" value="opt.weight" (change)="toggleEditable($event,opt)" />
+       <input [formControlName]="opt.key" class="form-check-input" type="checkbox" value="opt.weight" (change)="toggleEditable($event,opt)" />
        {{opt.label}}</label>
     </div>
   </div>

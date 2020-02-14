@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { default as localeEn } from '@angular/common/locales/en';
 import { TokenStorage } from '../../../../auth/token.storage';
+import { AuthenticateService } from '../../../../auth/authenticate.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'dynamic-form-builder',
@@ -24,13 +26,15 @@ export class DynamicFormBuilderComponent implements OnInit {
   inputValue: string;
   listOfForms: any[] = [];
   options = [];
+  categoriesStringArray = [];
   companyName = sessionStorage.getItem('C_NAME');
   sub: any;
   page: number;
    defaultWeight = 0;
    defaultWeightRadio = 0;
   compareFn = (o1: any, o2: any) => (o1 && o2 ? o1.value === o2.value : o1 === o2);
-  constructor(  private token: TokenStorage, private service:CrudService,  private datePipe: DatePipe,
+  companyId: any;
+  constructor(  private token: TokenStorage, private service: CrudService,  private authService: AuthService,
      private fb: FormBuilder, private notification: NzNotificationService,  private route: ActivatedRoute,
      private router: Router) {
     this.myForm = new FormGroup({
@@ -40,6 +44,7 @@ export class DynamicFormBuilderComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       dateOfBirth: new FormControl(),
       mobile: new FormControl(),
+      visitor: new FormControl(this.authService.user),
       email: new FormControl(),
       address: new FormControl(),
       formName: new FormControl(),
@@ -49,6 +54,7 @@ export class DynamicFormBuilderComponent implements OnInit {
       jobName: new FormControl(),
       startDate: new FormControl(),
       endDate: new FormControl(),
+      filesPublic: new FormControl(false),
     });
     this.form = new FormGroup({
       fields: new FormControl(JSON.stringify(this.fields)),
@@ -71,13 +77,14 @@ export class DynamicFormBuilderComponent implements OnInit {
       if (name !== null && name !== undefined) {
         this.getAllFormsList();
       }
-    // this.getForm(localStorage.getItem('FORM_NAME'));
-    //  barTwo = () => { console.log(this.fields); }
   }
 
 
   onSubmit(value) {
-    this.service.save(value,'/application/save').subscribe(
+    console.log(value)
+    if(this.authService.user.userRoles== null && this.authService.user.userRoles== null) {
+
+    this.service.save(value, '/application/save').subscribe(
       result => {
         this.createNotification('success');
         this.router.navigate(['/dashboard']);
@@ -87,7 +94,10 @@ export class DynamicFormBuilderComponent implements OnInit {
         console.log(error.error)
       }
     )
-
+  } else {
+    this.notification.error('error', 'You are not allowed to apply')
+    this.router.navigate(['/dashboard'])
+  }
   }
 
   onInput(value: string): void {
@@ -97,7 +107,7 @@ export class DynamicFormBuilderComponent implements OnInit {
   }
 
 getAllFormsList() {
-  this.service.getAll('/create-form/get-all').subscribe(
+  this.service.getAll('/create-form/get-all-by-company').subscribe(
     result => {
       console.log(result)
       this.options = result;
@@ -148,7 +158,11 @@ addWeightingFromCheckbox(opt, checked) {
       result => {
         if (result!== null && result !== undefined) {
         this.formData = result
-        console.log(this.formData)
+        let userInfo = this.authService.user
+        let array = Object.keys(this.formData.category).map(k => this.formData.category[k]);
+        array.forEach(item => {
+          if (item.constructor === Object) { this.categoriesStringArray.push(item.name) }
+        })
         this.fields = result.questions;
         this.myForm.controls['formName'].setValue(this.formData.formName);
         this.myForm.controls['category'].setValue(this.formData.category);
@@ -156,6 +170,14 @@ addWeightingFromCheckbox(opt, checked) {
         this.myForm.controls['startDate'].setValue(this.formData.startDate);
         this.myForm.controls['endDate'].setValue(this.formData.endDate);
         this.myForm.controls['overallWeight'].setValue(this.formData.overallWeight);
+        this.myForm.controls['companyName'].setValue(this.formData.companyName);
+        this.myForm.controls['firstName'].setValue(userInfo.firstName);
+        this.myForm.controls['middleName'].setValue(userInfo.middleName);
+        this.myForm.controls['lastName'].setValue(userInfo.lastName);
+        this.myForm.controls['mobile'].setValue(userInfo.mobilePhone);
+        this.myForm.controls['dateOfBirth'].setValue(userInfo.dateOfBirth);
+        this.myForm.controls['address'].setValue(userInfo.street);
+        this.myForm.controls['email'].setValue(userInfo.userName);
 
         let fieldsCtrls = {};
         let id = new FormControl();

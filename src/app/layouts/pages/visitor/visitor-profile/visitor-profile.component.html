@@ -1,0 +1,72 @@
+
+<nz-card>
+<nz-table #basicTable>
+  <thead>
+    <tr>
+      <th>APPLICANT INFORMATION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FULL NAME</strong></td>
+      <td>{{data?.firstName}},{{data?.middleName}}</td>
+      <td>{{data.lastName}}</td>
+    </tr>
+    <tr>
+      <td><strong>GENDER</strong></td>
+      <td>{{data?.gender}}</td>
+    </tr>
+    <tr>
+      <td><strong>EMAIL</strong></td>
+      <td>{{data?.userName}}</td>
+      <td>{{data.email}}</td>
+    </tr>
+    <tr>
+      <td><strong>ID NUMBER</strong></td>
+      <td>{{data.idNumber}}</td>
+    </tr>
+    <tr>
+      <td><strong>ABOUT</strong></td>
+      <td>{{data.aboutVisitor}}</td>
+    </tr>
+    <tr>
+      <td><strong>ADDRESS</strong></td>
+      <td>{{data.street}}</td>
+      <td>{{data.city}}</td>
+      <td>{{data.stateProvince}}</td>
+      <td>{{data.country}}</td>
+    </tr>
+    <tr>
+      <td><strong>PHONE</strong></td>
+      <td>{{data.mobilePhone}}</td>
+      <td>{{data.officePhone}}</td>
+    </tr>
+    <tr>
+      <td><strong>CURRENT EXPEREINCE</strong></td>
+      <td>{{data.experience}}</td>
+    </tr>
+     <tr>
+      <td><u><strong>REFERENCES</strong></u></td>
+    </tr>
+    <tr *ngFor="let refs of data?.references">
+      <td>{{refs.refName}}</td>
+      <td>{{refs.refPhone}}</td>
+      <td>{{refs.refEmail}}</td>
+      <td>{{refs.refAddress}}</td>
+    </tr>
+    <tr >
+      <td><u><strong>SKILLS</strong></u></td>
+    </tr>
+    <tr >
+      <td *ngFor="let sk of data.skills">{{sk.skill}}</td>
+    </tr>
+    <tr >
+      <td><u><strong>CERTIFICATES</strong></u></td>
+    </tr>
+   <tr>
+      <td  *ngFor="let cert of data.certificates" >{{cert.certificate}}</td>
+    </tr>
+
+  </tbody>
+</nz-table>
+</nz-card>

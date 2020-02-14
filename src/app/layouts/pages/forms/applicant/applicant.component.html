@@ -18,20 +18,24 @@
     </tr>
   </tbody>
 </nz-table> -->
-
-<table style="width:100%">
-  <tr >
-    <th>Questions</th>
-    <th>answers</th>
-  </tr >
-  <tr  *ngFor="let data of questionnareArray; let j = index;">
-    <td>{{ data }}</td>
-    <!-- <div *ngIf="applicatantArray[j].length !== 1">
-      <td >{{ applicatantArray[j].label }}</td>
-    </div> -->
-      <td>{{ applicatantArray[j] }}</td>
-      <!-- <td *ngIf="applicatantArray[j].length === 1">{{ applicatantArray[j] }}</td> -->
-  </tr>
-</table>
-
+<nz-card>
+<nz-table  style="width:100%">
+  <thead>
+    <tr >
+      <th>Questions</th>
+      <th>answers</th>
+    </tr >
+  </thead>
+  <tbody>
+    <tr  *ngFor="let data of questionnareArray; let j = index;">
+      <td>{{ data }}</td>
+      <!-- <div *ngIf="applicatantArray[j].length !== 1">
+        <td >{{ applicatantArray[j].label }}</td>
+      </div> -->
+        <td>{{ applicatantArray[j] }}</td>
+        <!-- <td *ngIf="applicatantArray[j].length === 1">{{ applicatantArray[j] }}</td> -->
+    </tr>
+  </tbody>
+</nz-table>
+</nz-card>
 <!-- {{applicatantArray|}} -->

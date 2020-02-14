@@ -30,7 +30,6 @@ export class ApplicantComponent implements OnInit {
         this.applicatant = result;
         if (this.applicatant !== null && this.applicatant !== undefined) {
           let array = Object.keys(this.applicatant.answers).map(k => this.applicatant.answers[k]);
-          console.log(array)
           array.forEach(item => {
             if (item.constructor === String) { this.applicatantArray.push(item) }
             if (item.constructor === Array)  { this.applicatantArray.push(item) }
@@ -44,7 +43,6 @@ export class ApplicantComponent implements OnInit {
             if (item.constructor === Boolean)  { this.applicatantArray.push(item) }
             if (item.constructor === Number )  { this.applicatantArray.push(item) }
           })
-          console.log(this.applicatantArray);
           this.getCreatedForm(this.applicatant)
         }
       },
@@ -60,8 +58,7 @@ export class ApplicantComponent implements OnInit {
         this.questionnare = result;
         if (this.questionnare !== null && this.questionnare !== undefined) {
           this.questionnareArray = Object.keys(this.questionnare.questions).map(k => this.questionnare.questions[k].label);
-          console.log(this.questionnareArray )
-          }
+         }
         },
         error => {
           console.log(error.error)
