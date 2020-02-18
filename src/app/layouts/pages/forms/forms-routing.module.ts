@@ -4,6 +4,7 @@ import { CreateFormComponent } from './createForm/createForm.component';
 import { DynamicFormBuilderComponent } from './dynamic-form-builder/dynamic-form-builder.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { ApplicantComponent } from './applicant/applicant.component';
+import { AdvertListComponent } from './advert-list/advert-list.component';
 const routes: Routes = [
   {
     path: '',
@@ -21,9 +22,19 @@ const routes: Routes = [
     data: { title: 'Available Applications' },
   },
   {
+    path: 'adverts',
+    component: AdvertListComponent,
+    data: { title: 'List Adverts' },
+  },
+  {
     path: 'edit/:id',
     component: ApplicantComponent,
     data: { title: 'Available Applications' },
+  },
+  {
+    path: 'edit-advert/:id',
+    component: CreateFormComponent,
+    data: { title: 'Edit Ad' },
   },
   {
     path: 'new',

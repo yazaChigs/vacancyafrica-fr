@@ -17,12 +17,14 @@ import { FieldBuilderComponent } from './dynamic-form-builder/field-builder/fiel
 import { ApplicationsComponent } from './applications/applications.component';
 import { QuillModule } from 'ngx-quill';
 import { ApplicantComponent } from './applicant/applicant.component';
+import { AdvertListComponent } from './advert-list/advert-list.component';
+import { AdvertComponent } from './advert/advert.component';
 @NgModule({
   imports: [FormsRoutingModule, FormsModule, ReactiveFormsModule,CommonModule, QuillModule,
     NgZorroAntdModule.forRoot(), DynamicFormBuilderModule,
 
      SharedModule, CleanUIModule],
-  declarations: [ CreateFormComponent,  ApplicationsComponent, ApplicantComponent,
+  declarations: [ CreateFormComponent,  ApplicationsComponent, ApplicantComponent, AdvertListComponent, AdvertComponent
     // DynamicFormBuilderComponent,
     // FieldBuilderComponent,
     // TextBoxComponent,

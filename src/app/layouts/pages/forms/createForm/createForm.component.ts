@@ -7,6 +7,7 @@ import { CrudService } from '../../../../shared/service/crud.service';
 import { BaseNameService } from '../../../../shared/service/basename.service';
 import { BaseNameType } from 'src/app/shared/enum/base-name-type.enum';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-createForm',
@@ -26,9 +27,13 @@ export class CreateFormComponent implements OnInit {
   compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
   companyName = sessionStorage.getItem('C_NAME');
   listOfForms: any[];
+  listOfFormsCompany: any[];
   selectedValue :any;
   isSaveLoading = false
   loading = false
+  isLoading = false
+  id: string;
+  advert: any;
 
   // returns all form groups under contacts
   get createdFormHeader() {
@@ -42,13 +47,21 @@ export class CreateFormComponent implements OnInit {
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private formService: FormService, private baseNameService: BaseNameService,
-     private notification: NzNotificationService, private service: CrudService) {}
+     private notification: NzNotificationService, private service: CrudService, private activatedRouter: ActivatedRoute) {
+      this.id = this.activatedRouter.snapshot.params.id;
+      console.log(this.id)
+     }
 
   ngOnInit() {
 
     this.form = this.fb.group({
         id: new FormControl(),
+        version: new FormControl(),
+        createdById: new FormControl(),
+        dateCreated: new FormControl(),
+        uuid: new FormControl(),
         overallWeight: new FormControl(0),
+        saveAsCustomTemplate: new FormControl(false),
         formName: new FormControl('', Validators.required),
         companyName: new FormControl(this.companyName, Validators.required),
         category: new FormControl(null, Validators.required),
@@ -62,6 +75,10 @@ export class CreateFormComponent implements OnInit {
 
     this.adForm = this.fb.group({
       id: new FormControl(),
+      version: new FormControl(),
+      createdById: new FormControl(),
+      dateCreated: new FormControl(),
+      uuid: new FormControl(),
       title: new FormControl('', Validators.required),
       job: new FormControl('', Validators.required),
       companyName: new FormControl(this.companyName, Validators.required),
@@ -80,11 +97,48 @@ export class CreateFormComponent implements OnInit {
       files: new FormControl(),
   });
 
+  if(this.id !== null && this.id !== undefined) {
+    this.getAdvert();
+  }
+
     // set contactlist to this field
     this.contactList = this.form.get('questions') as FormArray;
     this.anwersList = this.form.get('options') as FormArray;
     this.getCategories();
-    this.getAllFormsList();
+    this.getAllFormsListByCompany();
+    this.getAllFormsList()
+  }
+
+  getAdvert() {
+    this.service.getItem('/advert/get-item/' + this.id).subscribe(
+      result => {
+        console.log(result)
+        this.advert = result;
+        this.adForm.controls['id'].setValue(this.advert.id);
+        this.adForm.controls['version'].setValue(this.advert.version);
+        this.adForm.controls['createdById'].setValue(this.advert.createdById);
+        this.adForm.controls['dateCreated'].setValue(this.advert.dateCreated);
+        this.adForm.controls['uuid'].setValue(this.advert.uuid);
+        this.adForm.controls['title'].setValue(this.advert.title);
+        this.adForm.controls['job'].setValue(this.advert.job);
+        this.adForm.controls['companyName'].setValue(this.advert.companyName);
+        this.adForm.controls['showCompanyName'].setValue(this.advert.showCompanyName);
+        this.adForm.controls['salary'].setValue(this.advert.salary);
+        this.adForm.controls['salaryPrefix'].setValue(this.advert.salaryPrefix);
+        this.adForm.controls['showSalary'].setValue(this.advert.showSalary);
+        this.adForm.controls['showBenefits'].setValue(this.advert.showBenefits);
+        this.adForm.controls['countryOfPlacement'].setValue(this.advert.countryOfPlacement);
+        this.adForm.controls['benefits'].setValue(this.advert.benefits);
+        this.adForm.controls['category'].setValue(this.advert.category);
+        this.adForm.controls['formName'].setValue(this.advert.formName);
+        this.adForm.controls['description'].setValue(this.advert.description);
+        this.adForm.controls['startDate'].setValue(this.advert.startDate);
+        this.adForm.controls['endDate'].setValue(this.advert.endDate);
+      },
+      error => {
+        console.log(error.error)
+      }
+    );
   }
 
   // contact formgroup
@@ -128,6 +182,12 @@ export class CreateFormComponent implements OnInit {
   compareByValue(f1: any, f2: any) {
     return f1 && f2 && f1.id === f2.id;
   }
+
+  resetForm() {
+    this.adForm.reset();
+  }
+
+
 
   setMediaUploadHeaders = (file: UploadFile) => {
     return {
@@ -235,13 +295,12 @@ export class CreateFormComponent implements OnInit {
       }
     );
   }
-  getAllFormsList() {
+  getAllFormsListByCompany() {
+  this.isLoading = true
     this.service.getAll('/create-form/get-all-by-company').subscribe(
       result => {
-        console.log(result)
-        // this.options = result;
-        this.listOfForms = result;
-        // this.createNotification('success');
+        this.listOfFormsCompany = result;
+        this.isLoading = false
       },
         error => {
           this.createNotification('error');
@@ -249,6 +308,20 @@ export class CreateFormComponent implements OnInit {
         }
     );
   }
+
+  getAllFormsList() {
+    this.isLoading = true
+      this.service.getAll('/create-form/get-all').subscribe(
+        result => {
+          this.listOfForms = result;
+          this.isLoading = false
+        },
+          error => {
+            this.createNotification('error');
+            console.log(error.error)
+          }
+      );
+    }
 
   getCategories() {
     const baseType = BaseNameType;
@@ -270,7 +343,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   getForm(event) {
-    console.log(this.selectedValue);
     if (this.selectedValue !== null && this.selectedValue !== undefined) {
     this.service.getItem('/create-form/get/' + this.selectedValue).subscribe(
       result => {

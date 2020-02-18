@@ -12,8 +12,8 @@ export class Global {
 
 
 
-  // baseUrl = 'http://localhost:8088/vacancyafrica';
- baseUrl = 'https://www.vacancy.africa/vacancy';
+  baseUrl = 'http://localhost:8088/vacancyafrica';
+//  baseUrl = 'https://www.vacancy.africa/vacancy';
 
 
 

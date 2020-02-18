@@ -54,6 +54,7 @@ const routes: Routes = [
       {
         path: 'company',
         loadChildren: 'src/app/layouts/pages/site-manager/company/company.module#CompanyModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'forms',

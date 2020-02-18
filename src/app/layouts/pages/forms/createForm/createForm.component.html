@@ -28,7 +28,7 @@
                      </div>
               </div>
               <div nz-row nzType="flex" nxJustify="center" [nzGutter]="8">
-                <div nz-col nzSpan="8">
+                <div nz-col nzSpan="6">
                   <nz-form-item>
                     <nz-form-control>
                       <nz-select  formControlName="category" nzMode="tags" nzPlaceHolder="Please select category" [nzLoading]="loading" [compareWith]="compareFn">
@@ -37,19 +37,24 @@
                   </nz-form-control>
                   </nz-form-item>
                 </div>
-                <div nz-col nzSpan="8">
+                <div nz-col nzSpan="5">
                   <nz-form-item class="full-width" appearance="outline">
                     <nz-form-control>
                       <nz-date-picker formControlName="startDate"></nz-date-picker>
                     </nz-form-control>
                   </nz-form-item>
                             </div>
-                            <div nz-col nzSpan="8">
+                            <div nz-col nzSpan="5">
                               <nz-form-item>
                                 <nz-form-control>
                                   <nz-date-picker formControlName="endDate"></nz-date-picker>
                                 </nz-form-control>
                               </nz-form-item>
+                                        </div>
+                                        <div nz-col nzSpan="4">
+                                          <nz-form-item>
+                                            <nz-form-control><nz-switch formControlName="saveAsCustomTemplate" name="showBenefits">save</nz-switch></nz-form-control>
+                                          </nz-form-item>
                                         </div>
               </div>
 
@@ -320,24 +325,21 @@
           </div>
           <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="button" class="mr-2" (click)="addContact()">Next Question</button>
         </nz-card >
-        <div nz-row>
-          <div nz-col nzSpan="8" nzJustify="end">
-            <button nz-button nzType="secondary"type="submit"><i nz-icon nzType="poweroff"></i>Save Template</button>
-          </div>
-        </div>
             </form>
+            {{form.value | json}}
 <ng-template #extraTemplate>
-  <a href="/dashboard/alpha">Home</a>
+  <nz-dropdown>
+    <button nz-button nzType="link" nz-dropdown>|Custom Templates|</button>
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item *ngFor="let o of listOfForms"><a>{{o.formName}}</a></li>
+      </ul>
+  </nz-dropdown>
+  <button nz-button nzType="link" >|Standard Templates|</button>
 </ng-template>
 </nz-tab>
 <nz-tab nzTitle="Create Advert">
-  <div class="card">
-    <div class="card-header mb-2">
-      <div class="utils__title">
-        <strong>Post Add/Edit</strong>
-      </div>
-    </div>
-    <div class="card-body">
+  <nz-card  nzType="inner" nzTitle="Add Advert" [nzExtra]="advertTemplate">
+    <div>
       <div class="addPost">
         <form nz-form [nzLayout]="'verical'" [formGroup]="adForm" (submit)="submitAd(adForm.value)">
           <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
@@ -353,8 +355,15 @@
             <nz-form-item>
               <nz-form-label>Advert Form</nz-form-label>
               <nz-form-control>
-                <nz-select [(ngModel)]="selectedValue" formControlName="formName" style="width: 100%"  nzPlaceHolder="Please select post form "  [compareWith]="compareFn" (ngModelChange)="getForm($event)">
+                <!-- <nz-select [(ngModel)]="selectedValue" nzAllowClear formControlName="formName" style="width: 100%"  nzPlaceHolder="Please select post form "  [compareWith]="compareFn" (ngModelChange)="getForm($event)">
                   <nz-option *ngFor="let option of listOfForms" [nzLabel]="option.formName" [nzValue]="option.formName" ></nz-option>
+                </nz-select> -->
+
+                <nz-select [(ngModel)]="selectedValue" formControlName="formName" nzPlaceHolder="Select users" nzAllowClear (ngModelChange)="getForm($event)">
+                  <nz-option *ngFor="let o of listOfFormsCompany" [nzValue]="o.formName" [nzLabel]="o.formName"></nz-option>
+                  <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                    <i nz-icon nzType="loading" class="loading-icon"></i> Loading Data...
+                  </nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -450,7 +459,6 @@
             <div  nz-col nzSpan="5"><nz-form-label>Salary:</nz-form-label></div>
             <div  nz-col nzSpan="8">
               <nz-form-item>
-                <!-- <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="salary">Salary</nz-form-label> -->
                 <nz-form-control>
                   <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                     <ng-template #addOnBeforeTemplate>
@@ -510,7 +518,12 @@
         </form>
       </div>
     </div>
-  </div>
-  <!-- {{adForm.value | json}} -->
+    </nz-card>
+    <ng-template #advertTemplate>
+      <!-- <a>List</a> -->
+      <button nz-button nzType="link" type="reset" (click)="resetForm()">Clear</button>
+      <button nz-button nzType="link" type="button"  routerLink="/forms/adverts">List</button>
+    </ng-template>
+  {{adForm.value | json}}
 </nz-tab>
 </nz-tabset>
