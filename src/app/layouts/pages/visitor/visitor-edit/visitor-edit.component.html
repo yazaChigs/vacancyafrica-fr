@@ -29,8 +29,8 @@
         <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
           <div nz-col nzSpan="8">
             <nz-form-item>
-              <nz-form-control>
-                  <input formControlName="dateOfBirth" nz-input PlaceHolder="D.O.B">
+              <nz-form-control class="full-width">
+                  <nz-date-picker nzPlaceHolder="D.O.B" formControlName="dateOfBirth"></nz-date-picker>
                 </nz-form-control>
             </nz-form-item>
             </div>
@@ -118,8 +118,8 @@
                 <div nz-col nzSpan="8">
                   <nz-form-item>
                     <nz-form-control nzErrorTip="categories Required">
-                      <nz-select formControlName="jobCategory"  nzPlaceHolder="Choose Job Category" [compareWith]="compareFn">
-                        <nz-option  *ngFor="let item of categoryList" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
+                      <nz-select formControlName="jobCategory" nzMode="multiple" nzPlaceHolder="Choose Job Category" [compareWith]="compareFn">
+                        <nz-option  *ngFor="let item of categoryList" [nzLabel]="item.name" [nzValue]="item"></nz-option>
                         </nz-select>
                   </nz-form-control>
                   </nz-form-item>
@@ -151,30 +151,30 @@
                       </div>
                     </div>
                 <nz-divider nzText="Skills" nzOrientation="left"></nz-divider>
-                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
-                  <div formArrayName="skills" *ngFor="let a of form.get('skills')['controls']; let j = index">
-                    <div [formGroupName]="j" style="margin-bottom: 10px;">
-                      <div nz-col nzSpan="15">
+                <div formArrayName="skills" *ngFor="let a of form.get('skills')['controls']; let j = index">
+                  <div [formGroupName]="j" style="margin-bottom: 10px;">
+                    <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                      <div nz-col nzSpan="8">
                     <input nz-input type="text" placeholder="Add skill..." name="skill" formControlName="skill">
                       </div>
                       <div nz-col nzSpan="5">
-                        <button nz-button nzType="link" type="button" (click)="addSkill()" style="top: -10px;"><i nz-icon nzType="plus"></i></button>
-                        <button nz-button nzType="link" type="button" (click)="removeSkill(j)" style="top: -10px;" ><i nz-icon nzType="minus"></i></button>
+                        <button nz-button nzType="link" type="button" (click)="addSkill()"><i nz-icon nzType="plus"></i></button>
+                        <button nz-button nzType="link" type="button" (click)="removeSkill(j)" ><i nz-icon nzType="minus"></i></button>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <nz-divider nzText="Certificates" nzOrientation="left"></nz-divider>
-                <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
-                  <div formArrayName="certificates" *ngFor="let a of form.get('certificates')['controls']; let k = index">
-                    <div [formGroupName]="k" style="margin-bottom: 10px;">
-                      <div nz-col nzSpan="15">
+                <div formArrayName="certificates" *ngFor="let a of form.get('certificates')['controls']; let k = index">
+                  <div [formGroupName]="k" style="margin-bottom: 10px;">
+                    <div nz-row nzType="flex" nzJustify="start" [nzGutter]="8">
+                      <div nz-col nzSpan="8">
                         <input nz-input type="text" placeholder="Add certificates..." name="certificate" formControlName="certificate">
                       </div>
                         <div nz-col nzSpan="5">
-                          <button nz-button nzType="link" type="button" (click)="addCertificate()" style="top: -10px;"><i nz-icon nzType="plus"></i></button>
-                          <button nz-button nzType="link" type="button" (click)="removeCertificates(k)" style="top: -10px;" ><i nz-icon nzType="minus"></i></button>
+                          <button nz-button nzType="link" type="button" (click)="addCertificate()" ><i nz-icon nzType="plus"></i></button>
+                          <button nz-button nzType="link" type="button" (click)="removeCertificates(k)"  ><i nz-icon nzType="minus"></i></button>
                       </div>
                     </div>
                     </div>
@@ -287,7 +287,7 @@
               </div>
         </nz-card>
         </form>
-        <!-- {{form.value | json}} -->
+        {{form.value | json}}
 </nz-tab>
 <nz-tab nzTitle="Logo">
  <app-visitor-logo></app-visitor-logo>

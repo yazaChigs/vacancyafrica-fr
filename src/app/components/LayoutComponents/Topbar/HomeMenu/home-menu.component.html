@@ -1,8 +1,26 @@
 <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
   <a nz-dropdown class="dropdown">
-    <i class="icmn-home"></i>
+    <nz-badge [nzCount]="badgeCount">
+      <i class="icmn-home" style="font-size:xx-large; top: 50px;"></i>
+      </nz-badge>
   </a>
   <ul nz-menu class="activity">
+
+    <li nz-menu-item class="item" *ngFor="let item of relatedAds">
+      <i class="icon icmn-star-full"></i>
+      <div class="inner">
+        <div class="title">
+          <span class="pull-right">now</span>
+          <a [routerLink]="['/forms/view']" [queryParams]="{ formName:item.formName }">
+            Job Match: <span class="badge badge-danger">New</span>
+          </a>
+        </div>
+        <div class="descr">
+          {{item.title}}
+        </div>
+      </div>
+    </li>
+
     <li nz-menu-item class="item">
       <i class="icon icmn-star-full"></i>
       <div class="inner">

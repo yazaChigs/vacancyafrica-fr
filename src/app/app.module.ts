@@ -34,6 +34,7 @@ import { DashboardComponent } from './layouts/pages/site-manager/dashboard/dashb
 import { CleanUIModule } from './components/CleanUIComponents/cleanui.module'
 import { SiteManagerModule } from './layouts/pages/site-manager/site.module'
 import { AuthGuard } from './components/LayoutComponents/Guard/auth.guard';
+import { PushNotificationService } from './services/push-notification.service'
 const LOCALE_PROVIDERS = [
   { provide: LOCALE_ID, useValue: 'en' },
   { provide: NZ_I18N, useValue: localeZorro },
@@ -104,7 +105,7 @@ const firebaseConfig = {
     ...LOCALE_PROVIDERS, DatePipe,
     { provide: NZ_ICONS, useValue: icons },
     { provide: FirestoreSettingsToken, useValue: {} },
-    AuthenticateService, AuthGuard,
+    AuthenticateService, AuthGuard, PushNotificationService,
     TokenStorage,
     Global,
     { provide: LocationStrategy, useClass: HashLocationStrategy },

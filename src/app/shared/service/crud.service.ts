@@ -35,9 +35,16 @@ export class CrudService implements BaseService {
     const formData = new FormData();
     formData.append('files', files);
     formData.append('id', id);
-    console.log(files)
-    console.log(formData)
     return this.http.post<any>(this.baseUrl + url, formData);
+  }
+
+  public getWithParams( url: string, categories): Observable<any> {
+    const formData = new FormData();
+    // formData.append('files', files);
+    formData.append('categories', categories);
+    console.log(categories)
+    console.log(formData)
+    return this.http.post<any>(this.baseUrl + url, categories);
   }
 
 }

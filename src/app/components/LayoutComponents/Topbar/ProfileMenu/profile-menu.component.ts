@@ -5,6 +5,8 @@ import { VisitorLoginComponent } from '../../../../layouts/pages/visitor/visitor
 import { NzDrawerService, NzNotificationService } from 'ng-zorro-antd';
 import { Global } from '../../../../global';
 import { TokenStorage } from '../../../../auth/token.storage';
+import { CrudService } from '../../../../shared/service/crud.service';
+import { PushNotificationOptions, PushNotificationService } from 'src/app/services/push-notification.service';
 const TOKEN_KEY = 'AuthToken';
 const USER_KEY = 'UserData';
 const ROLE_KEY = 'RoleData';
@@ -28,11 +30,13 @@ export class TopbarProfileMenuComponent {
   role: string
   haveToLogin = false;
   imageLink = ''
+  relatedAds: any;
 
   constructor(
     private router: Router,
     private drawerService: NzDrawerService, private notification: NzNotificationService, public global: Global,
-    public authService: AuthService, private token: TokenStorage) {
+    public authService: AuthService, private token: TokenStorage, public service: CrudService,
+     private _pushNotificationService: PushNotificationService) {
     let  userInfo = this.authService.user;
     if (userInfo !== null && userInfo !== undefined) {
 
@@ -46,18 +50,44 @@ export class TopbarProfileMenuComponent {
       this.imageLink = this.global.baseUrl  + '/api/user/logo/' + userInfo.id;
     } else{
       this.imageLink = this.global.baseUrl  + '/api/visitor/logo/' + userInfo.id;
-    }
+      }
 
     } else {
       this.imageLink = ''
         this.haveToLogin = true
     }
-    console.log(this.imageLink)
   }
 
   badgeCountIncrease() {
     this.badgeCount = this.badgeCount + 1
   }
+
+
+
+  pushNotification(value) {
+    const title = 'Hello ' + this.userName;
+    const options = new PushNotificationOptions();
+    options.body = value.length +' Jobs match your category, apply now!!';
+
+    this._pushNotificationService.create(title, options).subscribe((notif) => {
+      if (notif.event.type === 'show') {
+        console.log('onshow');
+        setTimeout(() => {
+          notif.notification.close();
+        }, 30000);
+      }
+      if (notif.event.type === 'click') {
+        console.log('click');
+        notif.notification.close();
+      }
+      if (notif.event.type === 'close') {
+        console.log('close');
+      }
+    },
+    (err) => {
+         console.log(err);
+    });
+}
 
   adminLogin() {
     this.authService.SignOut()

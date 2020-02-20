@@ -81,7 +81,6 @@ export class DynamicFormBuilderComponent implements OnInit {
 
 
   onSubmit(value) {
-    console.log(value)
     if(this.authService.user.userRoles== null && this.authService.user.userRoles== null) {
 
     this.service.save(value, '/application/save').subscribe(
@@ -109,7 +108,6 @@ export class DynamicFormBuilderComponent implements OnInit {
 getAllFormsList() {
   this.service.getAll('/create-form/get-all-by-company').subscribe(
     result => {
-      console.log(result)
       this.options = result;
       this.listOfForms = result;
       // this.createNotification('success');

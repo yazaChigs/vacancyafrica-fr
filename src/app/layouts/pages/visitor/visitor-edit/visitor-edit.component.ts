@@ -33,7 +33,9 @@ export class VisitorEditComponent implements OnInit {
   switchValue = false;
   previewImage: string | undefined = '';
   previewVisible = false;
-  arr: FormArray;
+  referenceArr: FormArray;
+  skillArr: FormArray;
+  certtificateArr: FormArray;
   avalailableFiles: any[];
 
 
@@ -159,17 +161,19 @@ getUser(id) {
   }
 
   addItem() {
-    this.arr = this.form.get('references') as FormArray;
-    this.arr.push(this.createItem());
+    this.referenceArr = this.form.get('references') as FormArray;
+    this.referenceArr.push(this.createItem());
   }
   addSkill() {
-    this.arr = this.form.get('skills') as FormArray;
-    this.arr.push(this.createSkill());
+    this.skillArr = this.form.get('skills') as FormArray;
+    this.skillArr.push(this.createSkill());
+    return this.skillArr
   }
 
   addCertificate() {
-    this.arr = this.form.get('certificates') as FormArray;
-    this.arr.push(this.createCertificate());
+    this.certtificateArr = this.form.get('certificates') as FormArray;
+    this.certtificateArr.push(this.createCertificate());
+    // return this.certtificateArr
   }
 
   removePhone(index) {
@@ -290,9 +294,40 @@ getUser(id) {
     this.form.get('postalCode').setValue(data.postalCode);
     this.form.get('jobCategory').setValue(data.jobCategory);
     this.form.get('qualification').setValue(data.qualification);
-    // this.form.get('branch').setValue(data.branch);
     this.form.get('password').setValue(data.password);
     this.form.get('checkPassword').setValue(data.password);
+
+
+
+       const refArr = this.form.get('references') as FormArray;
+      refArr.clear();
+      data.references.forEach(b => {
+        refArr.removeAt(0)
+        const fg = this.createItem();
+        fg.reset(b);
+        refArr.push(fg);
+      });
+      // this.addItem();
+
+      const skiArr = this.form.get('skills') as FormArray;
+      skiArr.clear();
+      data.skills.forEach(b => {
+        const fg = this.createSkill();
+        fg.reset(b);
+        skiArr.push(fg);
+      });
+      // this.addSkill();
+
+      const certArr = this.form.get('certificates') as FormArray;
+      certArr.clear();
+      data.certificates.forEach(b => {
+        const fg = this.createCertificate();
+        fg.reset(b);
+        certArr.push(fg);
+      });
+      // this.addCertificate();
+
+
   }
 
   handleChange({ file, fileList }: UploadChangeParam): void {

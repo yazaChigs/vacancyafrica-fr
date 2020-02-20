@@ -66,8 +66,8 @@ export class CreateFormComponent implements OnInit {
         companyName: new FormControl(this.companyName, Validators.required),
         category: new FormControl(null, Validators.required),
         jobName: new FormControl('', Validators.required),
-        startDate: new FormControl(),
-        endDate: new FormControl(),
+        startDate: new FormControl('', Validators.required),
+        endDate: new FormControl('', Validators.required),
       questions: this.fb.array([this.createContact()])
     });
 
@@ -92,8 +92,8 @@ export class CreateFormComponent implements OnInit {
       category: new FormControl(null, Validators.required),
       formName : new FormControl(null, Validators.required),
       description: new FormControl('', Validators.required),
-      startDate: new FormControl(),
-      endDate: new FormControl(),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
       files: new FormControl(),
   });
 

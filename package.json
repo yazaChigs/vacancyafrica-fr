@@ -79,6 +79,7 @@
     "ngx-perfect-scrollbar": "^7.2.0",
     "ngx-permissions": "^7.0.3",
     "ngx-print": "^1.2.0-beta.2",
+    "ngx-push-notifications": "^7.0.2",
     "ngx-quill": "^4.6.3",
     "ngx-scrollbar": "^4.1.1",
     "nvd3": "^1.8.6",

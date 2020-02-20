@@ -323,7 +323,15 @@
                       <nz-divider ></nz-divider>
               </div>
           </div>
-          <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="button" class="mr-2" (click)="addContact()">Next Question</button>
+          <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+            <div nz-col nzSpan="4" >
+              <button nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="button" class="mr-2" (click)="addContact()">Next Question</button>
+            </div>
+            <div nz-col nzSpan="16" ></div>
+            <div nz-col nzSpan="4" >
+              <button nz-button nzType="default" [disabled]="!form.valid" [nzLoading]="isSaveLoading" type="submit" class="mr-2">Submit</button>
+            </div>
+            </div>
         </nz-card >
             </form>
             {{form.value | json}}
